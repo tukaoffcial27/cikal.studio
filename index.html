@@ -1007,9 +1007,12 @@
     .hero-headline { font-size: clamp(2.4rem, 8vw, 3.5rem); }
     .hero-stats { gap: 24px; flex-wrap: wrap; }
     .bento-grid { grid-template-columns: 1fr; }
-    .bento-card { padding: 24px; min-width: 0; word-break: break-word; }
-    .bento-card .card-tags { flex-wrap: wrap; }
-    .tag { white-space: normal; }
+    .portfolio-grid { grid-template-columns: 1fr !important; }
+    .bento-card { padding: 24px; min-width: 0; overflow: hidden; }
+    .card-title { font-size: 1rem; word-break: break-word; }
+    .card-desc { word-break: break-word; }
+    .card-tags { flex-wrap: wrap; }
+    .tag { white-space: nowrap; }
     .card-icon { width: 40px !important; height: 40px !important; flex-shrink: 0; }
     .why-grid { grid-template-columns: 1fr; }
     .process-steps { grid-template-columns: 1fr; }
@@ -1249,7 +1252,7 @@
     20+ live products shipped across SaaS, fintech, AI agents, and business tools. All built and deployed by Ahmad Riyadi.
   </p>
 
-  <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+  <div class="portfolio-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
 
     <a href="https://signalcore.cikal.store" target="_blank" rel="noopener" class="bento-card reveal" style="text-decoration:none; display:block;">
       <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
