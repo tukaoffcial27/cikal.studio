@@ -1,1667 +1,1301 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="google-site-verification" content="-POpHPgUeZeCtRURK8JKjmXbCRkWH8gEPpSOim4UIfg" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Cikal Studio Labs — We Build Software That Scales</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-<style>
-  :root {
-    --white: #ffffff;
-    --off-white: #F9FAFB;
-    --ink: #0A0A0F;
-    --ink-light: #3D3D4E;
-    --ink-muted: #8B8B9E;
-    --cyan: #00C2CB;
-    --purple: #7B2FBE;
-    --magenta: #E040FB;
-    --border: #E8E8F0;
-    --card-bg: #FAFAFD;
-    --shadow-sm: 0 1px 3px rgba(10,10,15,0.06), 0 1px 2px rgba(10,10,15,0.04);
-    --shadow-md: 0 4px 16px rgba(10,10,15,0.08), 0 2px 6px rgba(10,10,15,0.04);
-    --shadow-lg: 0 16px 48px rgba(10,10,15,0.1), 0 4px 16px rgba(10,10,15,0.06);
-    --radius: 16px;
-    --radius-sm: 10px;
-    --radius-lg: 24px;
-    --transition: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Cikal Studio Labs — We build software that scales. From SaaS to AI systems to crypto ecosystems. Jakarta, Indonesia → Global." />
+  <meta name="google-site-verification" content="-POpHPgUeZeCtRURK8JKjmXbCRkWH8gEPpSOim4UIfg" />
+  <meta property="og:title" content="Cikal Studio Labs — We Build Software That Scales" />
+  <meta property="og:description" content="From SaaS platforms to full crypto ecosystems. We design, build, and deploy production-ready software." />
+  <meta property="og:url" content="https://www.cikal.studio" />
+  <title>Cikal Studio Labs — We Build Software That Scales</title>
+  <link rel="icon" href="images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --cyan: #00C2CB;
+      --purple: #7B3FE4;
+      --navy: #080C18;
+      --navy-2: #0D1220;
+      --navy-3: #111827;
+      --navy-4: #1A2235;
+      --slate: #1E2D45;
+      --text: #F0F4FF;
+      --text-2: #8B9CB8;
+      --text-3: #3A4E68;
+      --gold: #C9A84C;
+      --green: #22D48A;
+    }
 
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  html { scroll-behavior: smooth; font-size: 16px; }
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--navy); }
+    ::-webkit-scrollbar-thumb { background: var(--slate); border-radius: 99px; }
 
-  body {
-    font-family: 'Outfit', sans-serif;
-    background: var(--white);
-    color: var(--ink);
-    line-height: 1.6;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ─── NOISE TEXTURE OVERLAY ─── */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.4;
-  }
-
-  /* ─── SCROLLBAR ─── */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: var(--off-white); }
-  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
-  ::-webkit-scrollbar-thumb:hover { background: var(--ink-muted); }
-
-  /* ─── NAVBAR ─── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    padding: 0 48px;
-    height: 70px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: rgba(255,255,255,0.85);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(232,232,240,0.6);
-    transition: box-shadow var(--transition);
-  }
-  nav.scrolled { box-shadow: 0 2px 20px rgba(10,10,15,0.06); }
-
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
-  .nav-logo img {
-    height: 36px;
-    width: auto;
-  }
-  .nav-logo-text {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 1rem;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-  }
-  .nav-logo-text span {
-    display: block;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 400;
-    color: var(--cyan);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .nav-links {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    list-style: none;
-  }
-  .nav-links a {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--ink-light);
-    text-decoration: none;
-    padding: 6px 14px;
-    border-radius: 8px;
-    transition: color var(--transition), background var(--transition);
-  }
-  .nav-links a:hover { color: var(--ink); background: var(--off-white); }
-
-  .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .lang-toggle {
-    display: flex;
-    align-items: center;
-    background: var(--off-white);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 4px;
-    gap: 2px;
-  }
-  .lang-btn {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--ink-muted);
-    background: transparent;
-    border: none;
-    padding: 4px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all var(--transition);
-    letter-spacing: 0.05em;
-  }
-  .lang-btn.active {
-    background: var(--white);
-    color: var(--ink);
-    box-shadow: var(--shadow-sm);
-  }
-
-  .btn-primary {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--white);
-    background: var(--ink);
-    border: none;
-    padding: 10px 22px;
-    border-radius: 10px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: all var(--transition);
-    position: relative;
-    overflow: hidden;
-  }
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    opacity: 0;
-    transition: opacity var(--transition);
-  }
-  .btn-primary:hover::before { opacity: 1; }
-  .btn-primary span { position: relative; z-index: 1; }
-  .btn-primary svg { position: relative; z-index: 1; transition: transform var(--transition); }
-  .btn-primary:hover svg { transform: translateX(2px); }
-
-  /* ─── SECTIONS BASE ─── */
-  section { padding: 96px 48px; }
-
-  .section-label {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--cyan);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-  }
-  .section-label::before {
-    content: '';
-    display: block;
-    width: 20px; height: 1px;
-    background: var(--cyan);
-  }
-
-  .section-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 800;
-    color: var(--ink);
-    letter-spacing: -0.03em;
-    line-height: 1.1;
-    margin-bottom: 16px;
-  }
-  .section-title em {
-    font-style: normal;
-    background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--magenta) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .section-sub {
-    font-size: 1.05rem;
-    color: var(--ink-muted);
-    max-width: 520px;
-    line-height: 1.7;
-  }
-
-  /* ─── HERO ─── */
-  #hero {
-    min-height: 100vh;
-    padding: 0 48px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    padding-top: 70px;
-  }
-
-  .hero-mesh {
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-    overflow: hidden;
-  }
-  .mesh-blob {
-    position: absolute;
-    border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.12;
-    animation: drift 12s ease-in-out infinite;
-  }
-  .mesh-blob-1 {
-    width: 600px; height: 600px;
-    background: var(--cyan);
-    top: -200px; right: -100px;
-    animation-delay: 0s;
-  }
-  .mesh-blob-2 {
-    width: 500px; height: 500px;
-    background: var(--purple);
-    bottom: -150px; left: -100px;
-    animation-delay: -4s;
-  }
-  .mesh-blob-3 {
-    width: 350px; height: 350px;
-    background: var(--magenta);
-    top: 50%; right: 20%;
-    transform: translateY(-50%);
-    animation-delay: -8s;
-  }
-
-  @keyframes drift {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(30px, -20px) scale(1.05); }
-    66% { transform: translate(-20px, 30px) scale(0.97); }
-  }
-
-  .hero-grid-lines {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(232,232,240,0.4) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(232,232,240,0.4) 1px, transparent 1px);
-    background-size: 60px 60px;
-    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 2;
-    max-width: 900px;
-  }
-
-  .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    font-weight: 500;
-    color: var(--ink-light);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: var(--white);
-    border: 1px solid var(--border);
-    padding: 8px 16px;
-    border-radius: 99px;
-    margin-bottom: 32px;
-    box-shadow: var(--shadow-sm);
-    animation: fadeSlideUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.1s both;
-  }
-  .hero-badge-dot {
-    width: 6px; height: 6px;
-    background: var(--cyan);
-    border-radius: 50%;
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.5; transform: scale(0.8); }
-  }
-
-  .hero-headline {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(3rem, 7vw, 5.5rem);
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    line-height: 1.0;
-    color: var(--ink);
-    margin-bottom: 24px;
-    animation: fadeSlideUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.2s both;
-  }
-  .hero-headline .gradient-text {
-    background: linear-gradient(135deg, var(--cyan) 0%, var(--purple) 50%, var(--magenta) 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: gradientShift 5s ease infinite;
-  }
-  @keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-  }
-
-  .hero-sub {
-    font-size: 1.15rem;
-    color: var(--ink-muted);
-    max-width: 560px;
-    line-height: 1.75;
-    margin-bottom: 40px;
-    animation: fadeSlideUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.3s both;
-  }
-
-  .hero-actions {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    animation: fadeSlideUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.4s both;
-  }
-
-  .btn-secondary {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--ink);
-    background: transparent;
-    border: 1.5px solid var(--border);
-    padding: 10px 22px;
-    border-radius: 10px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    transition: all var(--transition);
-  }
-  .btn-secondary:hover {
-    border-color: var(--ink);
-    background: var(--off-white);
-  }
-
-  .hero-stats {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-    margin-top: 72px;
-    padding-top: 40px;
-    border-top: 1px solid var(--border);
-    animation: fadeSlideUp 0.8s cubic-bezier(0.4,0,0.2,1) 0.5s both;
-  }
-  .stat-item { text-align: left; }
-  .stat-number {
-    font-family: 'Syne', sans-serif;
-    font-size: 2rem;
-    font-weight: 800;
-    color: var(--ink);
-    letter-spacing: -0.04em;
-    line-height: 1;
-  }
-  .stat-label {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem;
-    color: var(--ink-muted);
-    margin-top: 4px;
-  }
-  .stat-divider {
-    width: 1px;
-    height: 40px;
-    background: var(--border);
-  }
-
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ─── CAPABILITIES ─── */
-  #capabilities {
-    background: var(--off-white);
-  }
-
-  .capabilities-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: 24px;
-    margin-bottom: 52px;
-    flex-wrap: wrap;
-  }
-
-  .bento-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
-    gap: 20px;
-  }
-
-  .bento-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 36px;
-    position: relative;
-    overflow: hidden;
-    transition: all var(--transition);
-    cursor: default;
-    box-shadow: var(--shadow-sm);
-  }
-  .bento-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    opacity: 0;
-    transition: opacity var(--transition);
-    background: linear-gradient(135deg,
-      rgba(0,194,203,0.04) 0%,
-      rgba(123,47,190,0.04) 50%,
-      rgba(224,64,251,0.04) 100%);
-  }
-  .bento-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: transparent; }
-  .bento-card:hover::after { opacity: 1; }
-
-  .bento-card.span-2 { grid-column: span 2; }
-
-  .card-icon {
-    width: 52px; height: 52px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 24px;
-    position: relative;
-  }
-  .card-icon svg { width: 26px; height: 26px; }
-
-  .icon-cyan { background: rgba(0,194,203,0.1); color: var(--cyan); }
-  .icon-purple { background: rgba(123,47,190,0.1); color: var(--purple); }
-  .icon-magenta { background: rgba(224,64,251,0.1); color: var(--magenta); }
-  .icon-blue { background: rgba(59,130,246,0.1); color: #3B82F6; }
-  .icon-green { background: rgba(16,185,129,0.1); color: #10B981; }
-  .icon-orange { background: rgba(245,158,11,0.1); color: #F59E0B; }
-
-  .card-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.2rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 10px;
-    letter-spacing: -0.02em;
-  }
-  .card-desc {
-    font-size: 0.9rem;
-    color: var(--ink-muted);
-    line-height: 1.65;
-  }
-  .card-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-top: 20px;
-  }
-  .tag {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.65rem;
-    font-weight: 500;
-    color: var(--ink-light);
-    background: var(--off-white);
-    border: 1px solid var(--border);
-    padding: 4px 10px;
-    border-radius: 6px;
-    letter-spacing: 0.04em;
-  }
-
-  /* span-2 card layout */
-  .bento-card.span-2 .card-inner {
-    display: flex;
-    gap: 32px;
-    align-items: flex-start;
-  }
-  .bento-card.span-2 .card-inner .card-text { flex: 1; }
-  .bento-card.span-2 .card-visual {
-    flex: 0 0 160px;
-    height: 120px;
-    background: var(--off-white);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .ai-visual {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px;
-    width: 100%;
-  }
-  .ai-line {
-    height: 6px;
-    border-radius: 3px;
-    background: linear-gradient(90deg, var(--cyan), var(--purple));
-    animation: aiPulse 2s ease-in-out infinite;
-  }
-  .ai-line:nth-child(2) { width: 70%; animation-delay: 0.2s; }
-  .ai-line:nth-child(3) { width: 85%; animation-delay: 0.4s; }
-  .ai-line:nth-child(4) { width: 55%; animation-delay: 0.6s; }
-  @keyframes aiPulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
-
-  /* ─── WHY US ─── */
-  #why {
-    background: var(--white);
-  }
-
-  .why-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    margin-top: 52px;
-  }
-
-  .why-card {
-    background: var(--white);
-    padding: 40px 32px;
-    transition: background var(--transition);
-    position: relative;
-    overflow: hidden;
-  }
-  .why-card::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--cyan), var(--purple), var(--magenta));
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--transition);
-  }
-  .why-card:hover { background: var(--off-white); }
-  .why-card:hover::before { transform: scaleX(1); }
-
-  .why-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--ink-muted);
-    letter-spacing: 0.1em;
-    margin-bottom: 24px;
-  }
-  .why-icon {
-    width: 44px; height: 44px;
-    margin-bottom: 20px;
-  }
-  .why-icon svg { width: 44px; height: 44px; }
-  .why-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 10px;
-    letter-spacing: -0.02em;
-  }
-  .why-desc {
-    font-size: 0.875rem;
-    color: var(--ink-muted);
-    line-height: 1.65;
-  }
-
-  /* ─── PROCESS ─── */
-  #process {
-    background: var(--ink);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .process-mesh {
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 60% at 20% 50%, rgba(0,194,203,0.08) 0%, transparent 70%),
-      radial-gradient(ellipse 50% 50% at 80% 50%, rgba(224,64,251,0.08) 0%, transparent 70%);
-  }
-
-  #process .section-label { color: rgba(0,194,203,0.8); }
-  #process .section-label::before { background: rgba(0,194,203,0.8); }
-  #process .section-title { color: var(--white); }
-  #process .section-sub { color: rgba(255,255,255,0.5); }
-
-  .process-steps {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    margin-top: 64px;
-    position: relative;
-  }
-  .process-steps::before {
-    content: '';
-    position: absolute;
-    top: 28px;
-    left: 10%;
-    right: 10%;
-    height: 1px;
-    background: linear-gradient(90deg,
-      transparent,
-      rgba(0,194,203,0.3) 20%,
-      rgba(123,47,190,0.3) 50%,
-      rgba(224,64,251,0.3) 80%,
-      transparent);
-    z-index: 0;
-  }
-
-  .process-step {
-    text-align: center;
-    padding: 0 24px;
-    position: relative;
-    z-index: 1;
-  }
-  .step-num {
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    background: var(--ink);
-    border: 1px solid rgba(255,255,255,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 28px;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.75rem;
-    color: var(--cyan);
-    letter-spacing: 0.05em;
-    position: relative;
-    transition: all var(--transition);
-  }
-  .process-step:hover .step-num {
-    background: linear-gradient(135deg, var(--cyan), var(--purple));
-    border-color: transparent;
-    color: var(--white);
-    transform: scale(1.1);
-  }
-  .step-title {
-    font-family: 'Syne', sans-serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--white);
-    margin-bottom: 10px;
-    letter-spacing: -0.01em;
-  }
-  .step-desc {
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.6;
-  }
-
-  /* ─── CTA BANNER ─── */
-  #cta {
-    background: var(--white);
-    padding: 80px 48px;
-  }
-
-  .cta-inner {
-    background: linear-gradient(135deg, var(--ink) 0%, #1a1a2e 100%);
-    border-radius: var(--radius-lg);
-    padding: 80px 72px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .cta-inner::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 50% 80% at 20% 50%, rgba(0,194,203,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 80% at 80% 50%, rgba(224,64,251,0.12) 0%, transparent 60%);
-  }
-  .cta-label {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    color: var(--cyan);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 24px;
-    position: relative;
-    z-index: 1;
-  }
-  .cta-title {
-    font-family: 'Syne', sans-serif;
-    font-size: clamp(2rem, 4vw, 3.2rem);
-    font-weight: 800;
-    color: var(--white);
-    letter-spacing: -0.04em;
-    line-height: 1.1;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
-  }
-  .cta-title em {
-    font-style: normal;
-    background: linear-gradient(135deg, var(--cyan), var(--magenta));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-  .cta-sub {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.5);
-    margin-bottom: 40px;
-    position: relative;
-    z-index: 1;
-  }
-  .cta-actions {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    position: relative;
-    z-index: 1;
-  }
-
-  .btn-white {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--ink);
-    background: var(--white);
-    border: none;
-    padding: 14px 28px;
-    border-radius: 12px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all var(--transition);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-  }
-  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
-
-  .btn-ghost-white {
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: rgba(255,255,255,0.7);
-    background: transparent;
-    border: 1.5px solid rgba(255,255,255,0.15);
-    padding: 14px 28px;
-    border-radius: 12px;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    transition: all var(--transition);
-  }
-  .btn-ghost-white:hover {
-    border-color: rgba(255,255,255,0.4);
-    color: var(--white);
-    background: rgba(255,255,255,0.06);
-  }
-
-  /* ─── FOOTER ─── */
-  footer {
-    background: var(--off-white);
-    border-top: 1px solid var(--border);
-    padding: 48px;
-  }
-  .footer-inner {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 24px;
-  }
-  .footer-logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    text-decoration: none;
-  }
-  .footer-logo img { height: 32px; }
-  .footer-logo-name {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 0.9rem;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-  }
-  .footer-links {
-    display: flex;
-    align-items: center;
-    gap: 32px;
-  }
-  .footer-links a {
-    font-size: 0.85rem;
-    color: var(--ink-muted);
-    text-decoration: none;
-    transition: color var(--transition);
-  }
-  .footer-links a:hover { color: var(--ink); }
-  .footer-copy {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    color: var(--ink-muted);
-    letter-spacing: 0.05em;
-  }
-
-  /* ─── WA FLOATING ─── */
-  .wa-float {
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 200;
-    width: 56px; height: 56px;
-    background: #25D366;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(37,211,102,0.4);
-    cursor: pointer;
-    text-decoration: none;
-    transition: all var(--transition);
-    animation: waEntrance 1s cubic-bezier(0.4,0,0.2,1) 1.5s both;
-  }
-  .wa-float:hover {
-    transform: scale(1.1) translateY(-2px);
-    box-shadow: 0 8px 32px rgba(37,211,102,0.5);
-  }
-  .wa-float svg { width: 28px; height: 28px; fill: white; }
-  .wa-pulse {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-    background: #25D366;
-    animation: waPulseRing 2s ease-out infinite;
-    z-index: -1;
-  }
-  @keyframes waPulseRing {
-    0% { transform: scale(1); opacity: 0.4; }
-    100% { transform: scale(1.6); opacity: 0; }
-  }
-  @keyframes waEntrance {
-    from { opacity: 0; transform: scale(0) translateY(20px); }
-    to { opacity: 1; transform: scale(1) translateY(0); }
-  }
-
-  .wa-tooltip {
-    position: absolute;
-    right: calc(100% + 12px);
-    top: 50%; transform: translateY(-50%);
-    background: var(--ink);
-    color: var(--white);
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 500;
-    white-space: nowrap;
-    padding: 8px 14px;
-    border-radius: 8px;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity var(--transition);
-  }
-  .wa-tooltip::after {
-    content: '';
-    position: absolute;
-    left: 100%;
-    top: 50%; transform: translateY(-50%);
-    border: 6px solid transparent;
-    border-left-color: var(--ink);
-  }
-  .wa-float:hover .wa-tooltip { opacity: 1; }
-
-  /* ─── SCROLL ANIMATIONS ─── */
-  .reveal {
-    opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
-  }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
-  .reveal-delay-1 { transition-delay: 0.1s; }
-  .reveal-delay-2 { transition-delay: 0.2s; }
-  .reveal-delay-3 { transition-delay: 0.3s; }
-  .reveal-delay-4 { transition-delay: 0.4s; }
-
-  /* ─── MOBILE NAV ─── */
-  .hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 4px;
-    background: none;
-    border: none;
-  }
-  .hamburger span {
-    display: block;
-    width: 22px; height: 2px;
-    background: var(--ink);
-    border-radius: 2px;
-    transition: all var(--transition);
-  }
-
-  /* ─── RESPONSIVE ─── */
-  @media (max-width: 1024px) {
-    .bento-grid { grid-template-columns: repeat(2, 1fr); }
-    .bento-card.span-2 { grid-column: span 1; }
-    .bento-card.span-2 .card-inner { flex-direction: column; }
-    .bento-card.span-2 .card-visual { display: none; }
-    .why-grid { grid-template-columns: repeat(2, 1fr); }
-    .process-steps { grid-template-columns: repeat(2, 1fr); gap: 40px; }
-    .process-steps::before { display: none; }
-  }
-
-  @media (max-width: 768px) {
-    nav { padding: 0 24px; }
-    .nav-links {
-      display: none;
+    /* BG Effects */
+    body::before {
+      content: '';
       position: fixed;
-      top: 68px; left: 0; right: 0;
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      flex-direction: column;
-      padding: 24px 32px;
+      top: -200px; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 600px;
+      background: radial-gradient(ellipse, rgba(0,194,203,0.06) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      bottom: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(ellipse, rgba(123,63,228,0.05) 0%, transparent 65%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* Typography */
+    h1,h2,h3 { font-family: 'Syne', sans-serif; }
+    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #00C2CB, #7B3FE4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Utility */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section { padding: 80px 0; position: relative; z-index: 1; }
+
+    /* ── NAVBAR ─────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(8,12,24,0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(30,45,69,0.6);
+    }
+    .nav-inner {
+      max-width: 1200px; margin: 0 auto;
+      padding: 0 24px; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo img { width: 36px; height: 36px; border-radius: 8px; }
+    .nav-logo span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 16px;
+      color: var(--text);
+    }
+    .nav-logo span em {
+      font-style: normal;
+      background: linear-gradient(135deg, #00C2CB, #7B3FE4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .nav-links {
+      display: flex; gap: 28px; align-items: center;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px; color: var(--text-2);
+      text-decoration: none; transition: color 0.2s;
+      font-weight: 500;
+    }
+    .nav-links a:hover { color: var(--cyan); }
+    .nav-links a.highlight {
+      color: var(--cyan);
+      border: 1px solid rgba(0,194,203,0.3);
+      padding: 6px 14px; border-radius: 6px;
+      font-size: 13px;
+    }
+    .nav-links a.highlight:hover {
+      background: rgba(0,194,203,0.08);
+    }
+    .nav-cta {
+      padding: 9px 20px;
+      background: linear-gradient(135deg, #00C2CB, #7B3FE4);
+      color: white !important;
+      font-weight: 700 !important;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 14px !important;
+      font-family: 'Syne', sans-serif;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* Mobile nav */
+    .hamburger {
+      display: none; background: none;
+      border: 1px solid var(--slate); border-radius: 8px;
+      width: 40px; height: 40px; cursor: pointer;
+      color: var(--text-2); font-size: 18px;
+      align-items: center; justify-content: center;
+    }
+    .mobile-menu {
+      display: none;
+      background: rgba(8,12,24,0.98);
+      border-top: 1px solid var(--slate);
+      padding: 16px 24px 20px;
+    }
+    .mobile-menu a {
+      display: block; padding: 14px 0;
+      font-size: 15px; color: var(--text-2);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(30,45,69,0.5);
+    }
+    .mobile-menu a:last-child { border-bottom: none; }
+    .mobile-cta-wrap { margin-top: 14px; }
+    .mobile-cta-wrap a {
+      display: block; text-align: center;
+      padding: 13px; font-size: 15px; font-weight: 700;
+      background: linear-gradient(135deg, #00C2CB, #7B3FE4);
+      color: white; border-radius: 8px;
+      text-decoration: none; border: none;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .mobile-menu.open { display: block; }
+    }
+
+    /* ── HERO ───────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 0 60px;
+      position: relative; z-index: 1;
+    }
+    .hero-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 60px; align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px; border-radius: 20px;
+      border: 1px solid rgba(0,194,203,0.25);
+      background: rgba(0,194,203,0.05);
+      font-size: 12px; color: var(--cyan);
+      font-family: 'JetBrains Mono', monospace;
+      margin-bottom: 20px;
+      letter-spacing: 0.05em;
+    }
+    .hero-tag .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--cyan);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    .hero h1 {
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 800; line-height: 1.1;
+      margin-bottom: 18px;
+    }
+    .hero p {
+      font-size: 16px; color: var(--text-2);
+      line-height: 1.7; margin-bottom: 28px;
+      max-width: 480px;
+    }
+    .hero-btns {
+      display: flex; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .btn-primary {
+      padding: 13px 28px;
+      background: linear-gradient(135deg, #00C2CB, #7B3FE4);
+      color: white; font-weight: 700;
+      border-radius: 10px; text-decoration: none;
+      font-size: 15px; font-family: 'Syne', sans-serif;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-primary:hover { opacity: 0.9; transform: translateY(-2px); }
+    .btn-secondary {
+      padding: 13px 24px;
+      background: transparent; color: var(--text-2);
+      font-weight: 600; border-radius: 10px;
+      text-decoration: none; font-size: 15px;
+      border: 1px solid var(--slate);
+      transition: all 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-secondary:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* Stats */
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .stat-box {
+      background: var(--navy-3);
+      border: 1px solid var(--slate);
+      border-radius: 12px; padding: 16px 14px;
+      text-align: center;
+    }
+    .stat-box .val {
+      font-family: 'Syne', sans-serif;
+      font-size: 28px; font-weight: 800;
+      background: linear-gradient(135deg, #00C2CB, #7B3FE4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+    }
+    .stat-box .lbl {
+      font-size: 12px; color: var(--text-2);
+      margin-top: 4px; font-weight: 500;
+    }
+    .stat-box .sub {
+      font-size: 10px; color: var(--text-3);
+      margin-top: 2px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* Hero right — YFIN ecosystem preview */
+    .hero-right {
+      position: relative;
+    }
+    .ecosystem-preview {
+      background: var(--navy-2);
+      border: 1px solid var(--slate);
+      border-radius: 16px; padding: 24px;
+      position: relative; overflow: hidden;
+    }
+    .ecosystem-preview::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 200px; height: 200px;
+      background: radial-gradient(ellipse, rgba(0,194,203,0.1), transparent 70%);
+      pointer-events: none;
+    }
+    .ep-header {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--slate);
+    }
+    .ep-header img { width: 32px; height: 32px; border-radius: 50%; }
+    .ep-header .ep-title { font-weight: 700; font-size: 14px; }
+    .ep-header .ep-sub {
+      font-size: 10px; color: var(--text-3);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ep-badge {
+      margin-left: auto;
+      font-size: 9px; padding: 3px 8px;
+      background: rgba(34,212,138,0.08);
+      border: 1px solid rgba(34,212,138,0.2);
+      color: var(--green); border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ep-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 8px; margin-bottom: 16px;
+    }
+    .ep-item {
+      background: var(--navy-3);
+      border: 1px solid var(--slate);
+      border-radius: 10px; padding: 10px 8px;
+      text-align: center; text-decoration: none;
+      transition: all 0.2s;
+      display: flex; flex-direction: column;
+      align-items: center; gap: 5px;
+    }
+    .ep-item:hover {
+      border-color: rgba(0,194,203,0.3);
+      transform: translateY(-2px);
+    }
+    .ep-item img {
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 1px solid rgba(0,194,203,0.2);
+    }
+    .ep-item .ep-name {
+      font-size: 10px; font-weight: 700;
+      color: var(--text); line-height: 1.2;
+    }
+    .ep-item .ep-url {
+      font-size: 9px; color: var(--text-3);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ep-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
       gap: 8px;
-      border-bottom: 1px solid var(--border);
-      box-shadow: var(--shadow-md);
-      z-index: 999;
     }
-    .nav-links.open { display: flex; }
-    .nav-links li { width: 100%; }
-    .nav-links li a {
-      display: block;
-      padding: 12px 0;
-      font-size: 1rem;
-      border-bottom: 1px solid var(--border);
+    .ep-stat {
+      background: var(--navy-4);
+      border-radius: 8px; padding: 8px;
+      text-align: center;
     }
-    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .hamburger.active span:nth-child(2) { opacity: 0; }
-    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-    .hamburger { display: flex; }
-    section { padding: 72px 24px; }
-    #hero { padding: 0 24px; padding-top: 70px; }
-    .hero-headline { font-size: clamp(2.4rem, 8vw, 3.5rem); }
-    .hero-stats { gap: 24px; flex-wrap: wrap; }
-    .bento-grid { grid-template-columns: 1fr; }
-    .portfolio-grid { grid-template-columns: 1fr !important; }
-    .bento-card { padding: 24px; min-width: 0; overflow: hidden; }
-    .card-title { font-size: 1rem; word-break: break-word; }
-    .card-desc { word-break: break-word; }
-    .card-tags { flex-wrap: wrap; }
-    .tag { white-space: nowrap; }
-    .card-icon { width: 40px !important; height: 40px !important; flex-shrink: 0; }
-    .why-grid { grid-template-columns: 1fr; }
-    .process-steps { grid-template-columns: 1fr; }
-    footer { padding: 32px 24px; }
-    .footer-inner { flex-direction: column; align-items: flex-start; gap: 20px; }
-    .footer-links { flex-wrap: wrap; gap: 20px; }
-    #cta { padding: 48px 24px; }
-    .cta-inner { padding: 48px 32px; }
-  }
-</style>
+    .ep-stat .v {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px; font-weight: 600;
+      color: var(--cyan);
+    }
+    .ep-stat .l {
+      font-size: 9px; color: var(--text-3);
+      margin-top: 2px;
+    }
+
+    /* ── SECTION DIVIDER ────────────────────── */
+    .divider {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 48px;
+    }
+    .divider .line { flex: 1; height: 1px; background: var(--slate); }
+    .divider span {
+      font-size: 11px; font-family: 'JetBrains Mono', monospace;
+      color: var(--text-3); letter-spacing: 0.12em;
+      text-transform: uppercase; white-space: nowrap;
+    }
+
+    /* Section header */
+    .section-header { text-align: center; margin-bottom: 48px; }
+    .section-tag {
+      display: inline-block;
+      font-size: 11px; font-family: 'JetBrains Mono', monospace;
+      color: var(--cyan); letter-spacing: 0.1em;
+      text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-header h2 {
+      font-size: clamp(24px, 3.5vw, 38px);
+      font-weight: 800; line-height: 1.2;
+      margin-bottom: 12px;
+    }
+    .section-header p {
+      font-size: 15px; color: var(--text-2);
+      line-height: 1.7; max-width: 540px; margin: 0 auto;
+    }
+
+    /* ── YFIN CASE STUDY ────────────────────── */
+    .case-study-hero {
+      background: linear-gradient(135deg, rgba(201,168,76,0.06), rgba(8,12,24,0.9));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 20px; padding: 36px;
+      margin-bottom: 24px;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 28px; align-items: center;
+    }
+    .cs-logo img {
+      width: 80px; height: 80px; border-radius: 50%;
+      border: 2px solid rgba(201,168,76,0.4);
+    }
+    .cs-content h3 {
+      font-size: 22px; font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .cs-content .cs-sub {
+      font-size: 11px; color: var(--gold);
+      font-family: 'JetBrains Mono', monospace;
+      letter-spacing: 0.06em; margin-bottom: 10px;
+    }
+    .cs-content p {
+      font-size: 14px; color: var(--text-2);
+      line-height: 1.6; margin-bottom: 14px;
+      max-width: 600px;
+    }
+    .cs-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .cs-tag {
+      font-size: 10px; padding: 3px 8px;
+      border-radius: 4px; font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.2);
+      color: var(--gold);
+    }
+    .cs-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; margin-bottom: 24px;
+    }
+    .cs-stat {
+      background: var(--navy-3); border: 1px solid var(--slate);
+      border-radius: 12px; padding: 16px 12px; text-align: center;
+    }
+    .cs-stat .v {
+      font-family: 'Syne', sans-serif;
+      font-size: 22px; font-weight: 800; color: var(--gold);
+    }
+    .cs-stat .l { font-size: 11px; color: var(--text-2); margin-top: 3px; font-weight: 500; }
+    .cs-stat .s { font-size: 9px; color: var(--text-3); margin-top: 2px; font-family: 'JetBrains Mono', monospace; }
+
+    /* Product grid */
+    .products-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .product-card {
+      background: var(--navy-3); border: 1px solid var(--slate);
+      border-radius: 12px; padding: 16px 14px;
+      text-decoration: none; display: flex;
+      flex-direction: column; gap: 8px;
+      transition: all 0.2s;
+    }
+    .product-card:hover {
+      border-color: rgba(0,194,203,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,194,203,0.06);
+    }
+    .pc-header { display: flex; align-items: center; gap: 8px; }
+    .pc-header img {
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid rgba(0,194,203,0.2);
+      flex-shrink: 0;
+    }
+    .pc-name { font-weight: 700; font-size: 13px; color: var(--text); }
+    .pc-badge {
+      font-size: 8px; padding: 2px 5px; border-radius: 3px;
+      font-family: 'JetBrains Mono', monospace; font-weight: 600;
+      display: inline-block; margin-top: 1px;
+    }
+    .b-live { background: rgba(34,212,138,0.1); border: 1px solid rgba(34,212,138,0.2); color: var(--green); }
+    .b-new  { background: rgba(0,194,203,0.1);  border: 1px solid rgba(0,194,203,0.2);  color: var(--cyan); }
+    .b-beta { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.2); color: #F59E0B; }
+    .pc-tag { font-size: 10px; color: var(--cyan); font-family: 'JetBrains Mono', monospace; }
+    .pc-desc { font-size: 11px; color: var(--text-2); line-height: 1.5; flex: 1; }
+    .pc-url { font-size: 9px; color: var(--text-3); font-family: 'JetBrains Mono', monospace; }
+
+    /* ── OTHER PORTFOLIO ────────────────────── */
+    .portfolio-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .port-card {
+      background: var(--navy-3); border: 1px solid var(--slate);
+      border-radius: 14px; overflow: hidden;
+      text-decoration: none; display: block;
+      transition: all 0.2s;
+    }
+    .port-card:hover {
+      border-color: rgba(123,63,228,0.3);
+      transform: translateY(-2px);
+    }
+    .port-body { padding: 18px; }
+    .port-name { font-weight: 700; font-size: 15px; margin-bottom: 4px; color: var(--text); }
+    .port-url { font-size: 10px; color: var(--cyan); font-family: 'JetBrains Mono', monospace; margin-bottom: 8px; }
+    .port-desc { font-size: 12px; color: var(--text-2); line-height: 1.6; margin-bottom: 12px; }
+    .port-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+    .port-tag {
+      font-size: 10px; padding: 2px 7px; border-radius: 4px;
+      background: var(--navy-4); border: 1px solid var(--slate);
+      color: var(--text-3); font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── CAPABILITIES ───────────────────────── */
+    .cap-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .cap-card {
+      background: var(--navy-3); border: 1px solid var(--slate);
+      border-radius: 14px; padding: 24px;
+      transition: all 0.2s;
+    }
+    .cap-card:hover { border-color: rgba(123,63,228,0.3); }
+    .cap-icon {
+      font-size: 28px; margin-bottom: 14px;
+    }
+    .cap-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+    .cap-card p { font-size: 13px; color: var(--text-2); line-height: 1.6; margin-bottom: 14px; }
+    .cap-tags { display: flex; flex-wrap: wrap; gap: 5px; }
+    .cap-tag {
+      font-size: 10px; padding: 3px 8px;
+      border-radius: 4px; background: var(--navy-4);
+      border: 1px solid var(--slate);
+      color: var(--text-3); font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── WHY US ─────────────────────────────── */
+    .why-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .why-card {
+      background: var(--navy-3); border: 1px solid var(--slate);
+      border-radius: 14px; padding: 24px;
+      display: flex; gap: 16px; align-items: flex-start;
+    }
+    .why-num {
+      font-family: 'Syne', sans-serif; font-size: 32px;
+      font-weight: 800; line-height: 1;
+      background: linear-gradient(135deg, #00C2CB, #7B3FE4);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      flex-shrink: 0;
+    }
+    .why-card h3 { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+    .why-card p { font-size: 13px; color: var(--text-2); line-height: 1.6; }
+
+    /* ── PROCESS ────────────────────────────── */
+    .process-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .proc-card {
+      background: var(--navy-3); border: 1px solid var(--slate);
+      border-radius: 14px; padding: 20px;
+      position: relative;
+    }
+    .proc-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 28px; font-weight: 600;
+      color: rgba(0,194,203,0.2); margin-bottom: 12px;
+    }
+    .proc-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
+    .proc-card p { font-size: 12px; color: var(--text-2); line-height: 1.6; }
+
+    /* ── TOKEN LAUNCH CTA ───────────────────── */
+    .token-cta {
+      background: linear-gradient(135deg, rgba(0,194,203,0.08), rgba(123,63,228,0.08));
+      border: 1px solid rgba(0,194,203,0.2);
+      border-radius: 20px; padding: 48px;
+      text-align: center;
+    }
+    .token-cta h2 {
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 800; margin-bottom: 12px;
+    }
+    .token-cta p {
+      font-size: 15px; color: var(--text-2);
+      line-height: 1.7; max-width: 520px;
+      margin: 0 auto 28px;
+    }
+    .token-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+    /* ── CTA SECTION ────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(0,194,203,0.06), rgba(123,63,228,0.06));
+      border: 1px solid rgba(123,63,228,0.2);
+      border-radius: 24px; padding: 64px 48px;
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800; margin-bottom: 14px;
+    }
+    .cta-section p {
+      font-size: 16px; color: var(--text-2);
+      max-width: 480px; margin: 0 auto 32px;
+      line-height: 1.7;
+    }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-wa {
+      padding: 13px 28px;
+      background: #25D366;
+      color: white !important; font-weight: 700;
+      border-radius: 10px; text-decoration: none;
+      font-size: 15px; font-family: 'Syne', sans-serif;
+      transition: opacity 0.2s, transform 0.2s;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-wa:hover { opacity: 0.9; transform: translateY(-2px); }
+
+    /* ── FOOTER ─────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--slate);
+      padding: 32px 0;
+      position: relative; z-index: 1;
+    }
+    .footer-inner {
+      max-width: 1200px; margin: 0 auto; padding: 0 24px;
+      display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-logo {
+      display: flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .footer-logo img { width: 28px; height: 28px; border-radius: 6px; }
+    .footer-logo span {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 14px; color: var(--text);
+    }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a {
+      font-size: 13px; color: var(--text-3);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--cyan); }
+    .footer-right {
+      font-size: 12px; color: var(--text-3);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    /* ── WA FLOAT ───────────────────────────── */
+    .wa-float {
+      position: fixed; bottom: 24px; right: 24px; z-index: 99;
+      width: 52px; height: 52px; border-radius: 50%;
+      background: #25D366;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 24px;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+      transition: transform 0.2s;
+    }
+    .wa-float:hover { transform: scale(1.1); }
+
+    /* ── REVEAL ANIMATION ───────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* ── RESPONSIVE ─────────────────────────── */
+    @media (max-width: 1024px) {
+      .products-grid { grid-template-columns: repeat(3, 1fr); }
+      .cs-stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-right { display: none; }
+      .section { padding: 60px 0; }
+      .cap-grid { grid-template-columns: 1fr; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .why-grid { grid-template-columns: 1fr; }
+      .case-study-hero { grid-template-columns: 1fr; }
+      .cs-logo { display: none; }
+      .cta-section { padding: 40px 24px; }
+      .token-cta { padding: 32px 20px; }
+    }
+    @media (max-width: 480px) {
+      .hero-stats { grid-template-columns: repeat(3, 1fr); }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .process-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ─── NAVBAR ─── -->
+<!-- NAV -->
 <nav id="navbar">
-  <a href="#hero" class="nav-logo">
-    <img src="images/logo.png" alt="Cikal Studio Labs" onerror="this.style.display='none'"/>
-    <div class="nav-logo-text">
-      Cikal Studio
-      <span>Labs</span>
-    </div>
-  </a>
-
-  <ul class="nav-links">
-    <li><a href="#capabilities" data-en="Capabilities" data-id="Layanan">Capabilities</a></li>
-    <li><a href="#portfolio" data-en="Portfolio" data-id="Portfolio">Portfolio</a></li>
-    <li><a href="#why" data-en="Why Us" data-id="Keunggulan">Why Us</a></li>
-    <li><a href="#process" data-en="Process" data-id="Proses">Process</a></li>
-    <li><a href="#cta" data-en="Contact" data-id="Kontak">Contact</a></li>
-    <li><a href="token-launch.html" style="color:#00C2CB; font-weight:600;" data-en="🚀 Token Launch" data-id="🚀 Token Launch">🚀 Token Launch</a></li>
-  </ul>
-
-  <div class="nav-right">
-    <a href="mailto:admin@cikal.studio" class="btn-primary">
-      <span data-en="Let's Talk" data-id="Hubungi Kami">Let's Talk</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+  <div class="nav-inner">
+    <a href="#hero" class="nav-logo">
+      <img src="images/logo.png" alt="Cikal Studio Labs" />
+      <span>Cikal Studio <em>Labs</em></span>
     </a>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+    <ul class="nav-links">
+      <li><a href="#yfin">$YFIN Ecosystem</a></li>
+      <li><a href="#capabilities">Capabilities</a></li>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="token-launch.html" class="highlight">🚀 Token Launch</a></li>
+      <li><a href="https://wa.me/6208111870347" target="_blank" rel="noopener" class="nav-cta">Let's Talk</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#yfin" onclick="toggleMenu()">$YFIN Ecosystem</a>
+    <a href="#capabilities" onclick="toggleMenu()">Capabilities</a>
+    <a href="#portfolio" onclick="toggleMenu()">Portfolio</a>
+    <a href="#why" onclick="toggleMenu()">Why Us</a>
+    <a href="token-launch.html">🚀 Token Launch</a>
+    <div class="mobile-cta-wrap">
+      <a href="https://wa.me/6208111870347" target="_blank" rel="noopener">Let's Talk →</a>
+    </div>
   </div>
 </nav>
 
-<!-- ─── HERO ─── -->
-<section id="hero">
-  <div class="hero-mesh">
-    <div class="mesh-blob mesh-blob-1"></div>
-    <div class="mesh-blob mesh-blob-2"></div>
-    <div class="mesh-blob mesh-blob-3"></div>
-    <div class="hero-grid-lines"></div>
-  </div>
-
-  <div class="hero-content">
-    <div class="hero-badge">
-      <div class="hero-badge-dot"></div>
-      <span data-en="AI-Powered · Full-Stack · Indonesia → Global · by Ahmad Riyadi" data-id="Berbasis AI · Full-Stack · Indonesia → Global · oleh Ahmad Riyadi">AI-Powered · Full-Stack · Indonesia → Global · by Ahmad Riyadi</span>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <div class="dot"></div>
+        AI-Powered · Full-Stack · Jakarta → Global
+      </div>
+      <h1>We Build<br/><span class="gradient-text">Software</span><br/>That Scales.</h1>
+      <p>From SaaS platforms to full crypto ecosystems — we design, build, and deploy production-ready software. Proven by $YFIN: 10 live products, 6 months.</p>
+      <div class="hero-btns">
+        <a href="https://wa.me/6208111870347" target="_blank" rel="noopener" class="btn-primary">Start a Project →</a>
+        <a href="#yfin" class="btn-secondary">View Our Work ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="val" data-count="20">0</div>
+          <div class="lbl">Live Products</div>
+          <div class="sub">in production</div>
+        </div>
+        <div class="stat-box">
+          <div class="val" data-count="6">0</div>
+          <div class="lbl">Years Exp.</div>
+          <div class="sub">full-stack</div>
+        </div>
+        <div class="stat-box">
+          <div class="val">100%</div>
+          <div class="lbl">Satisfaction</div>
+          <div class="sub">client rate</div>
+        </div>
+      </div>
     </div>
 
-    <h1 class="hero-headline">
-      <span data-en="We Build" data-id="Kami Membangun">We Build</span><br/>
-      <span class="gradient-text" data-en="Software That" data-id="Perangkat Lunak">Software That</span><br/>
-      <span data-en="Scales." data-id="Yang Skalabel.">Scales.</span>
-    </h1>
+    <!-- Hero right: YFIN ecosystem mini-preview -->
+    <div class="hero-right">
+      <div class="ecosystem-preview">
+        <div class="ep-header">
+          <img src="images/yfin-logo.png" alt="YFIN" />
+          <div>
+            <div class="ep-title">$YFIN Ecosystem</div>
+            <div class="ep-sub">yfin.io · BNB Smart Chain · Audited</div>
+          </div>
+          <span class="ep-badge">✓ LIVE</span>
+        </div>
+        <div class="ep-grid">
+          <a href="https://dex.yfin.io" target="_blank" class="ep-item">
+            <img src="images/yfindex.png" alt="YFinDEX" />
+            <div class="ep-name">YFinDEX</div>
+            <div class="ep-url">dex.yfin.io</div>
+          </a>
+          <a href="https://shield.yfin.io" target="_blank" class="ep-item">
+            <img src="images/yfinshield.png" alt="Shield" />
+            <div class="ep-name">YFIN Shield</div>
+            <div class="ep-url">shield.yfin.io</div>
+          </a>
+          <a href="https://pad.yfin.io" target="_blank" class="ep-item">
+            <img src="images/yfinpad.png" alt="YFINPad" />
+            <div class="ep-name">YFINPad</div>
+            <div class="ep-url">pad.yfin.io</div>
+          </a>
+          <a href="https://studio.yfin.io" target="_blank" class="ep-item">
+            <img src="images/yfinstudio.png" alt="Studio" />
+            <div class="ep-name">YFIN Studio</div>
+            <div class="ep-url">studio.yfin.io</div>
+          </a>
+          <a href="https://pay.yfin.io" target="_blank" class="ep-item">
+            <img src="images/yfinpay.png" alt="Pay" />
+            <div class="ep-name">YFIN Pay</div>
+            <div class="ep-url">pay.yfin.io</div>
+          </a>
+          <a href="https://intelegence.yfin.io" target="_blank" class="ep-item">
+            <img src="images/yfinintelegence.png" alt="Intelligence" />
+            <div class="ep-name">Intelligence</div>
+            <div class="ep-url">intelegence.yfin.io</div>
+          </a>
+        </div>
+        <div class="ep-stats">
+          <div class="ep-stat"><div class="v">10+</div><div class="l">Products</div></div>
+          <div class="ep-stat"><div class="v">$436K</div><div class="l">RWA Revenue</div></div>
+          <div class="ep-stat"><div class="v">17+</div><div class="l">Listings</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <p class="hero-sub" data-en="From SaaS platforms to AI-powered systems — we design, build, and deploy production-ready software that grows with your business." data-id="Dari platform SaaS hingga sistem berbasis AI — kami merancang, membangun, dan men-deploy perangkat lunak siap produksi yang tumbuh bersama bisnis Anda.">
-      From SaaS platforms to AI-powered systems — we design, build, and deploy production-ready software that grows with your business.
-    </p>
+<!-- YFIN ECOSYSTEM CASE STUDY -->
+<section class="section" id="yfin">
+  <div class="container">
+    <div class="divider reveal">
+      <div class="line"></div>
+      <span>Featured Case Study · Built by Cikal Studio Labs</span>
+      <div class="line"></div>
+    </div>
 
-    <div class="hero-actions">
-      <a href="mailto:admin@cikal.studio" class="btn-primary">
-        <span data-en="Start a Project" data-id="Mulai Proyek">Start a Project</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    <!-- Case study header -->
+    <div class="case-study-hero reveal">
+      <div class="cs-logo">
+        <img src="images/yfin-logo.png" alt="YFIN" />
+      </div>
+      <div class="cs-content">
+        <h3>$YFIN Ecosystem — Full DeFi Stack</h3>
+        <div class="cs-sub">yfin.io · BNB Smart Chain · InterFi Audited · June 2026</div>
+        <p>We built the entire $YFIN ecosystem from scratch — token, DEX, launchpad, security toolkit, studio, payment protocol, intelligence dashboard, and more. Every product is live, audited, and actively used. This is our proof of capability.</p>
+        <div class="cs-tags">
+          <span class="cs-tag">Solidity</span>
+          <span class="cs-tag">Next.js</span>
+          <span class="cs-tag">BNB Smart Chain</span>
+          <span class="cs-tag">Smart Contract</span>
+          <span class="cs-tag">InterFi Audited</span>
+          <span class="cs-tag">RWA Token</span>
+          <span class="cs-tag">DEX</span>
+          <span class="cs-tag">IDO Launchpad</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case study stats -->
+    <div class="cs-stats reveal">
+      <div class="cs-stat">
+        <div class="v">10+</div>
+        <div class="l">Live Products</div>
+        <div class="s">All deployed</div>
+      </div>
+      <div class="cs-stat">
+        <div class="v">6mo</div>
+        <div class="l">0 → Live</div>
+        <div class="s">Full ecosystem</div>
+      </div>
+      <div class="cs-stat">
+        <div class="v">$436K</div>
+        <div class="l">RWA Revenue</div>
+        <div class="s">Verified on-chain</div>
+      </div>
+      <div class="cs-stat">
+        <div class="v">0</div>
+        <div class="l">Critical Findings</div>
+        <div class="s">InterFi audit</div>
+      </div>
+    </div>
+
+    <!-- Product grid -->
+    <div class="products-grid">
+      <a href="https://dex.yfin.io" target="_blank" class="product-card reveal">
+        <div class="pc-header">
+          <img src="images/yfindex.png" alt="YFinDEX" />
+          <div>
+            <div class="pc-name">YFinDEX</div>
+            <span class="pc-badge b-live">LIVE</span>
+          </div>
+        </div>
+        <div class="pc-tag">Decentralized Exchange</div>
+        <div class="pc-desc">Full DEX on BSC with liquidity pools, token swap, and YFIN fee discount.</div>
+        <div class="pc-url">dex.yfin.io</div>
       </a>
-      <a href="#capabilities" class="btn-secondary">
-        <span data-en="Our Capabilities" data-id="Kemampuan Kami">Our Capabilities</span>
+      <a href="https://shield.yfin.io" target="_blank" class="product-card reveal reveal-delay-1">
+        <div class="pc-header">
+          <img src="images/yfinshield.png" alt="Shield" />
+          <div>
+            <div class="pc-name">YFIN Shield</div>
+            <span class="pc-badge b-new">NEW</span>
+          </div>
+        </div>
+        <div class="pc-tag">Web3 Security Toolkit</div>
+        <div class="pc-desc">Honeypot checker, rug pull detector, approval revoker & wallet scanner.</div>
+        <div class="pc-url">shield.yfin.io</div>
+      </a>
+      <a href="https://pad.yfin.io" target="_blank" class="product-card reveal reveal-delay-2">
+        <div class="pc-header">
+          <img src="images/yfinpad.png" alt="YFINPad" />
+          <div>
+            <div class="pc-name">YFINPad</div>
+            <span class="pc-badge b-live">LIVE</span>
+          </div>
+        </div>
+        <div class="pc-tag">IDO Launchpad + No-Code</div>
+        <div class="pc-desc">Launch IDO or deploy tokens, vesting & NFTs without writing code.</div>
+        <div class="pc-url">pad.yfin.io</div>
+      </a>
+      <a href="https://studio.yfin.io" target="_blank" class="product-card reveal reveal-delay-3">
+        <div class="pc-header">
+          <img src="images/yfinstudio.png" alt="Studio" />
+          <div>
+            <div class="pc-name">YFIN Studio</div>
+            <span class="pc-badge b-live">LIVE</span>
+          </div>
+        </div>
+        <div class="pc-tag">Smart Contract Services</div>
+        <div class="pc-desc">Custom BEP-20, vesting, NFT & RWA contracts. 24–48h delivery.</div>
+        <div class="pc-url">studio.yfin.io</div>
+      </a>
+      <a href="https://pay.yfin.io" target="_blank" class="product-card reveal">
+        <div class="pc-header">
+          <img src="images/yfinpay.png" alt="Pay" />
+          <div>
+            <div class="pc-name">YFIN Pay</div>
+            <span class="pc-badge b-beta">BETA</span>
+          </div>
+        </div>
+        <div class="pc-tag">Payment Protocol</div>
+        <div class="pc-desc">Unified payment layer — every payment burns $YFIN supply forever.</div>
+        <div class="pc-url">pay.yfin.io</div>
+      </a>
+      <a href="https://intelegence.yfin.io" target="_blank" class="product-card reveal reveal-delay-1">
+        <div class="pc-header">
+          <img src="images/yfinintelegence.png" alt="Intelligence" />
+          <div>
+            <div class="pc-name">Intelligence</div>
+            <span class="pc-badge b-live">LIVE</span>
+          </div>
+        </div>
+        <div class="pc-tag">On-chain Analytics</div>
+        <div class="pc-desc">Whale tracking, token signals & portfolio analysis. Hold-based tiers.</div>
+        <div class="pc-url">intelegence.yfin.io</div>
+      </a>
+      <a href="https://monitor.yfin.io" target="_blank" class="product-card reveal reveal-delay-2">
+        <div class="pc-header">
+          <img src="images/yfin-logo.png" alt="Monitor" />
+          <div>
+            <div class="pc-name">YFIN Monitor</div>
+            <span class="pc-badge b-live">LIVE</span>
+          </div>
+        </div>
+        <div class="pc-tag">Token Dashboard</div>
+        <div class="pc-desc">Live price, holders, TX history, vesting countdown & burn tracker.</div>
+        <div class="pc-url">monitor.yfin.io</div>
+      </a>
+      <a href="https://www.yfin.io" target="_blank" class="product-card reveal reveal-delay-3">
+        <div class="pc-header">
+          <img src="images/yfin-logo.png" alt="YFIN" />
+          <div>
+            <div class="pc-name">$YFIN Token</div>
+            <span class="pc-badge b-live">AUDITED</span>
+          </div>
+        </div>
+        <div class="pc-tag">BEP-20 · 1B Fixed Supply</div>
+        <div class="pc-desc">0% tax, non-mintable, LP locked. InterFi audited. 17+ platforms listed.</div>
+        <div class="pc-url">yfin.io</div>
       </a>
     </div>
 
-    <div class="hero-stats">
-      <div class="stat-item">
-        <div class="stat-number"><span class="counter" data-target="20">0</span>+</div>
-        <div class="stat-label" data-en="Live Products" data-id="Produk Live">Live Products</div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <div class="stat-number"><span class="counter" data-target="6">0</span>+</div>
-        <div class="stat-label" data-en="Years Experience" data-id="Tahun Pengalaman">Years Experience</div>
-      </div>
-      <div class="stat-divider"></div>
-      <div class="stat-item">
-        <div class="stat-number"><span class="counter" data-target="100">0</span>%</div>
-        <div class="stat-label" data-en="Client Satisfaction" data-id="Kepuasan Klien">Client Satisfaction</div>
+    <!-- Token launch CTA -->
+    <div class="token-cta reveal" style="margin-top:32px;">
+      <h2>Want a Token Ecosystem Like This?</h2>
+      <p>We offer end-to-end token launch services — from smart contract to CEX listing. Starter at $800, Full Ecosystem at $25,000.</p>
+      <div class="token-cta-btns">
+        <a href="token-launch.html" class="btn-primary">🚀 View Token Launch Packages</a>
+        <a href="https://www.yfin.io" target="_blank" class="btn-secondary">View $YFIN Live →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ─── CAPABILITIES ─── -->
-<section id="capabilities">
-  <div class="capabilities-header">
-    <div>
-      <div class="section-label reveal" data-en="What We Build" data-id="Yang Kami Bangun">What We Build</div>
-      <h2 class="section-title reveal reveal-delay-1">
-        <span data-en="Our Core" data-id="Kemampuan">Our Core</span><br/>
-        <em data-en="Capabilities" data-id="Inti Kami">Capabilities</em>
-      </h2>
+<!-- OTHER PORTFOLIO -->
+<section class="section" id="portfolio">
+  <div class="container">
+    <div class="divider reveal">
+      <div class="line"></div>
+      <span>Other Portfolio</span>
+      <div class="line"></div>
     </div>
-    <p class="section-sub reveal reveal-delay-2" data-en="End-to-end software development — from architecture to deployment. We build systems that are fast, reliable, and built to last." data-id="Pengembangan software end-to-end — dari arsitektur hingga deployment. Kami membangun sistem yang cepat, andal, dan tahan lama.">
-      End-to-end software development — from architecture to deployment. We build systems that are fast, reliable, and built to last.
-    </p>
-  </div>
-
-  <div class="bento-grid">
-
-    <!-- AI Systems — span 2 -->
-    <div class="bento-card span-2 reveal">
-      <div class="card-inner">
-        <div class="card-text">
-          <div class="card-icon icon-cyan">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 0 2h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1 0-2h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/><path d="M7.5 13.5h.01M16.5 13.5h.01M9.5 17h5"/></svg>
-          </div>
-          <div class="card-title" data-en="AI-Powered Systems" data-id="Sistem Berbasis AI">AI-Powered Systems</div>
-          <div class="card-desc" data-en="We build intelligent multi-agent systems, automation pipelines, and AI-integrated applications. From sales agents to CIO assistants — real AI that works." data-id="Kami membangun sistem multi-agent cerdas, pipeline otomasi, dan aplikasi terintegrasi AI. Dari sales agent hingga CIO assistant — AI nyata yang bekerja.">
-            We build intelligent multi-agent systems, automation pipelines, and AI-integrated applications. From sales agents to CIO assistants — real AI that works.
-          </div>
-          <div class="card-tags">
-            <span class="tag">LLM Integration</span>
-            <span class="tag">Multi-Agent</span>
-            <span class="tag">Gemini</span>
-            <span class="tag">Claude</span>
-            <span class="tag">RAG</span>
+    <div class="portfolio-grid">
+      <a href="https://signalcore.cikal.store" target="_blank" class="port-card reveal">
+        <div class="port-body">
+          <div class="port-name">SignalCore</div>
+          <div class="port-url">signalcore.cikal.store</div>
+          <div class="port-desc">Investment signal platform with real-time market data and analytics dashboard.</div>
+          <div class="port-tags">
+            <span class="port-tag">Next.js</span>
+            <span class="port-tag">FastAPI</span>
+            <span class="port-tag">Real-time</span>
           </div>
         </div>
-        <div class="card-visual">
-          <div class="ai-visual">
-            <div class="ai-line" style="width:100%"></div>
-            <div class="ai-line" style="width:70%"></div>
-            <div class="ai-line" style="width:85%"></div>
-            <div class="ai-line" style="width:55%"></div>
-            <div class="ai-line" style="width:90%"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- SaaS Platform -->
-    <div class="bento-card reveal reveal-delay-1">
-      <div class="card-icon icon-purple">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      </div>
-      <div class="card-title" data-en="SaaS Platforms" data-id="Platform SaaS">SaaS Platforms</div>
-      <div class="card-desc" data-en="Multi-tenant architecture, subscription billing, admin dashboards — production-ready SaaS from day one." data-id="Arsitektur multi-tenant, billing langganan, dashboard admin — SaaS siap produksi sejak hari pertama.">
-        Multi-tenant architecture, subscription billing, admin dashboards — production-ready SaaS from day one.
-      </div>
-      <div class="card-tags">
-        <span class="tag">FastAPI</span>
-        <span class="tag">Next.js</span>
-        <span class="tag">PostgreSQL</span>
-      </div>
-    </div>
-
-    <!-- CRM & Sales -->
-    <div class="bento-card reveal reveal-delay-2">
-      <div class="card-icon icon-blue">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-      </div>
-      <div class="card-title" data-en="CRM & Sales Automation" data-id="CRM & Otomasi Penjualan">CRM & Sales Automation</div>
-      <div class="card-desc" data-en="Lead management, automated outreach, pipeline tracking, and B2B sales agent systems that convert." data-id="Manajemen lead, outreach otomatis, pelacakan pipeline, dan sistem sales agent B2B yang mengkonversi.">
-        Lead management, automated outreach, pipeline tracking, and B2B sales agent systems that convert.
-      </div>
-      <div class="card-tags">
-        <span class="tag">CRM</span>
-        <span class="tag">Lead Gen</span>
-        <span class="tag">WhatsApp API</span>
-      </div>
-    </div>
-
-    <!-- Web Application -->
-    <div class="bento-card reveal reveal-delay-1">
-      <div class="card-icon icon-green">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
-      </div>
-      <div class="card-title" data-en="Web Applications" data-id="Aplikasi Web">Web Applications</div>
-      <div class="card-desc" data-en="Modern, responsive web apps built with clean code and optimized for performance, SEO, and scalability." data-id="Aplikasi web modern dan responsif dibangun dengan kode bersih, dioptimalkan untuk performa, SEO, dan skalabilitas.">
-        Modern, responsive web apps built with clean code and optimized for performance, SEO, and scalability.
-      </div>
-      <div class="card-tags">
-        <span class="tag">React</span>
-        <span class="tag">Next.js</span>
-        <span class="tag">TypeScript</span>
-      </div>
-    </div>
-
-    <!-- API & Integration -->
-    <div class="bento-card reveal reveal-delay-2">
-      <div class="card-icon icon-orange">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"/><line x1="8" x2="16" y1="12" y2="12"/></svg>
-      </div>
-      <div class="card-title" data-en="API & Integrations" data-id="API & Integrasi">API & Integrations</div>
-      <div class="card-desc" data-en="RESTful APIs, third-party integrations, webhooks, and data pipelines that connect your entire ecosystem." data-id="REST API, integrasi pihak ketiga, webhook, dan pipeline data yang menghubungkan seluruh ekosistem Anda.">
-        RESTful APIs, third-party integrations, webhooks, and data pipelines that connect your entire ecosystem.
-      </div>
-      <div class="card-tags">
-        <span class="tag">REST</span>
-        <span class="tag">GraphQL</span>
-        <span class="tag">Webhook</span>
-      </div>
-    </div>
-
-    <!-- Dashboard & Analytics -->
-    <div class="bento-card reveal reveal-delay-3">
-      <div class="card-icon icon-magenta">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
-      </div>
-      <div class="card-title" data-en="Dashboard & Analytics" data-id="Dashboard & Analitik">Dashboard & Analytics</div>
-      <div class="card-desc" data-en="Real-time monitoring dashboards, business intelligence tools, and actionable data visualizations." data-id="Dashboard monitoring real-time, alat business intelligence, dan visualisasi data yang actionable.">
-        Real-time monitoring dashboards, business intelligence tools, and actionable data visualizations.
-      </div>
-      <div class="card-tags">
-        <span class="tag">Real-time</span>
-        <span class="tag">Charts</span>
-        <span class="tag">Reports</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- ─── PORTFOLIO ─── -->
-<section id="portfolio" style="background: var(--off-white);">
-  <div class="section-label reveal">Live Products</div>
-  <h2 class="section-title reveal reveal-delay-1">
-    What We've<br/>
-    <em>Actually Built.</em>
-  </h2>
-  <p class="section-sub reveal reveal-delay-2" style="margin-bottom: 52px;">
-    20+ live products shipped across SaaS, fintech, AI agents, and business tools. All built and deployed by Ahmad Riyadi.
-  </p>
-
-  <div class="portfolio-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-
-    <a href="https://signalcore.cikal.store" target="_blank" rel="noopener" class="bento-card reveal" style="text-decoration:none; display:block;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <div class="card-icon icon-cyan" style="margin-bottom:0; width:40px; height:40px; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--ink);">SignalCore</div>
-          <div style="font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--cyan);">signalcore.cikal.store</div>
-        </div>
-      </div>
-      <div style="font-size:0.875rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;">Investment signal platform with real-time market data and analytics dashboard.</div>
-      <div class="card-tags"><span class="tag">Next.js</span><span class="tag">FastAPI</span><span class="tag">Real-time</span></div>
-    </a>
-
-    <a href="https://tuna.cikal.store" target="_blank" rel="noopener" class="bento-card reveal reveal-delay-1" style="text-decoration:none; display:block;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <div class="card-icon icon-purple" style="margin-bottom:0; width:40px; height:40px; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--ink);">Tuna Dashboard</div>
-          <div style="font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--cyan);">tuna.cikal.store</div>
-        </div>
-      </div>
-      <div style="font-size:0.875rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;">Financial reporting PWA for commodity trading — backed by Google Sheets API, real-time cashflow tracking.</div>
-      <div class="card-tags"><span class="tag">PWA</span><span class="tag">Google Sheets API</span><span class="tag">Finance</span></div>
-    </a>
-
-    <a href="https://nada.cikal.store" target="_blank" rel="noopener" class="bento-card reveal reveal-delay-2" style="text-decoration:none; display:block;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <div class="card-icon icon-magenta" style="margin-bottom:0; width:40px; height:40px; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--ink);">Nada</div>
-          <div style="font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--cyan);">nada.cikal.store</div>
-        </div>
-      </div>
-      <div style="font-size:0.875rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;">Music content platform with cover art management, PWA support for iOS & Android.</div>
-      <div class="card-tags"><span class="tag">Next.js</span><span class="tag">PWA</span><span class="tag">Mobile</span></div>
-    </a>
-
-    <a href="https://invoicepro.cikal.store" target="_blank" rel="noopener" class="bento-card reveal" style="text-decoration:none; display:block;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <div class="card-icon icon-green" style="margin-bottom:0; width:40px; height:40px; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--ink);">InvoicePro</div>
-          <div style="font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--cyan);">invoicepro.cikal.store</div>
-        </div>
-      </div>
-      <div style="font-size:0.875rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;">Commercial invoicing SaaS with LemonSqueezy monetization, PDF generation, and multi-currency support.</div>
-      <div class="card-tags"><span class="tag">SaaS</span><span class="tag">LemonSqueezy</span><span class="tag">PDF</span></div>
-    </a>
-
-    <a href="https://www.yfin.io" target="_blank" rel="noopener" class="bento-card reveal reveal-delay-1" style="text-decoration:none; display:block; background:linear-gradient(135deg,#0d1b3e 0%,#0a0e1a 100%); border:1px solid rgba(245,197,24,0.25);">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <div style="margin-bottom:0; width:40px; height:40px; flex-shrink:0; border-radius:50%; overflow:hidden; border:2px solid rgba(245,197,24,0.4); display:flex; align-items:center; justify-content:center; background:#0a0e1a;">
-          <img src="images/yfin-logo.png" alt="$YFIN" style="width:36px; height:36px; object-fit:cover; border-radius:50%;" onerror="this.parentElement.innerHTML='<span style=&quot;font-size:1.2rem&quot;>🐟</span>'"/>
-        </div>
-        <div>
-          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:#F5C518;">$YFIN — Yellowfin Token</div>
-          <div style="font-family:'DM Mono',monospace; font-size:0.68rem; color:#00C9B1;">yfin.io · BNB Smart Chain</div>
-        </div>
-      </div>
-      <div style="font-size:0.875rem; color:#94A3B8; line-height:1.6; margin-bottom:12px;">Utility token for the Indonesian tuna supply chain — backed by PT Cikal Tuna Mandiri. Live on 17 platforms including CoinGecko, DexScreener & PancakeSwap. 1B fixed supply, 0% tax, CEX-ready.</div>
-      <div style="display:flex; gap:8px; margin-bottom:14px; flex-wrap:wrap;">
-        <span style="font-family:'DM Mono',monospace; font-size:0.65rem; color:#F5C518; background:rgba(245,197,24,0.1); border:1px solid rgba(245,197,24,0.3); padding:2px 8px; border-radius:4px;">17 Platforms Listed</span>
-        <span style="font-family:'DM Mono',monospace; font-size:0.65rem; color:#10B981; background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); padding:2px 8px; border-radius:4px;">✓ Live on DEX</span>
-        <span style="font-family:'DM Mono',monospace; font-size:0.65rem; color:#94A3B8; background:rgba(148,163,184,0.1); border:1px solid rgba(148,163,184,0.2); padding:2px 8px; border-radius:4px;">$436K Biz Volume</span>
-      </div>
-      <div class="card-tags"><span class="tag">BEP-20</span><span class="tag">BSC</span><span class="tag">RWA Token</span><span class="tag">PancakeSwap</span></div>
-    </a>
-
-    <a href="https://cashflow.cikal.studio" target="_blank" rel="noopener" class="bento-card reveal reveal-delay-2" style="text-decoration:none; display:block;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <div class="card-icon icon-orange" style="margin-bottom:0; width:40px; height:40px; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--ink);">Cashflow CSL</div>
-          <div style="font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--cyan);">cashflow.cikal.studio</div>
-        </div>
-      </div>
-      <div style="font-size:0.875rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;">Internal cashflow management app with persistent login, multi-entity reporting, and localStorage sync.</div>
-      <div class="card-tags"><span class="tag">Dashboard</span><span class="tag">Analytics</span><span class="tag">PWA</span></div>
-    </a>
-
-    <a href="https://cvbuilder.guidify.app" target="_blank" rel="noopener" class="bento-card reveal" style="text-decoration:none; display:block;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <div class="card-icon icon-purple" style="margin-bottom:0; width:40px; height:40px; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--ink);">CV Builder</div>
-          <div style="font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--cyan);">cvbuilder.guidify.app</div>
-        </div>
-      </div>
-      <div style="font-size:0.875rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;">AI-powered CV generator with PDF export, multiple templates, and ATS-optimized formatting.</div>
-      <div class="card-tags"><span class="tag">AI</span><span class="tag">SaaS Tool</span><span class="tag">PDF</span></div>
-    </a>
-
-    <a href="https://invoicemaker.guidify.app" target="_blank" rel="noopener" class="bento-card reveal reveal-delay-1" style="text-decoration:none; display:block;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <div class="card-icon icon-green" style="margin-bottom:0; width:40px; height:40px; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--ink);">InvoiceMaker</div>
-          <div style="font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--cyan);">invoicemaker.guidify.app</div>
-        </div>
-      </div>
-      <div style="font-size:0.875rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;">Professional invoice generation tool with multi-currency, custom branding, and instant PDF download.</div>
-      <div class="card-tags"><span class="tag">SaaS Tool</span><span class="tag">Multi-currency</span><span class="tag">SEO</span></div>
-    </a>
-
-    <a href="https://globaltax.lifecalc.app" target="_blank" rel="noopener" class="bento-card reveal reveal-delay-2" style="text-decoration:none; display:block;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
-        <div class="card-icon icon-cyan" style="margin-bottom:0; width:40px; height:40px; flex-shrink:0;">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; color:var(--ink);">GlobalTax</div>
-          <div style="font-family:'DM Mono',monospace; font-size:0.68rem; color:var(--cyan);">globaltax.lifecalc.app</div>
-        </div>
-      </div>
-      <div style="font-size:0.875rem; color:var(--ink-muted); line-height:1.6; margin-bottom:16px;">Global tax calculator with AdSense monetization, SEO-optimized, country-specific tax rules.</div>
-      <div class="card-tags"><span class="tag">AdSense</span><span class="tag">Fintech Tool</span><span class="tag">SEO</span></div>
-    </a>
-
-  </div>
-
-  <div style="text-align:center; margin-top:40px;">
-    <p style="font-size:0.875rem; color:var(--ink-muted); font-family:'DM Mono',monospace;">+ 15 more products live in production</p>
-  </div>
-</section>
-
-<!-- ─── WHY US ─── -->
-<section id="why">
-  <div class="section-label reveal" data-en="Why Cikal Studio" data-id="Mengapa Cikal Studio">Why Cikal Studio</div>
-  <h2 class="section-title reveal reveal-delay-1">
-    <span data-en="Built Different." data-id="Dibangun Berbeda.">Built Different.</span><br/>
-    <em data-en="Delivered Different." data-id="Dikirim Berbeda.">Delivered Different.</em>
-  </h2>
-
-  <div class="why-grid">
-    <div class="why-card reveal">
-      <div class="why-num">01</div>
-      <div class="why-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="url(#g1)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <defs><linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00C2CB"/><stop offset="100%" stop-color="#7B2FBE"/></linearGradient></defs>
-          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
-        </svg>
-      </div>
-      <div class="why-title" data-en="Fast Delivery" data-id="Pengiriman Cepat">Fast Delivery</div>
-      <div class="why-desc" data-en="We ship fast without cutting corners. MVPs in weeks, not months. Every deadline is a commitment." data-id="Kami ship cepat tanpa mengorbankan kualitas. MVP dalam hitungan minggu, bukan bulan. Setiap deadline adalah komitmen.">
-        We ship fast without cutting corners. MVPs in weeks, not months. Every deadline is a commitment.
-      </div>
-    </div>
-
-    <div class="why-card reveal reveal-delay-1">
-      <div class="why-num">02</div>
-      <div class="why-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="url(#g2)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <defs><linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00C2CB"/><stop offset="100%" stop-color="#7B2FBE"/></linearGradient></defs>
-          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-        </svg>
-      </div>
-      <div class="why-title" data-en="Clean Architecture" data-id="Arsitektur Bersih">Clean Architecture</div>
-      <div class="why-desc" data-en="Maintainable, well-documented code that your future team will thank you for. No technical debt shortcuts." data-id="Kode yang mudah dipelihara dan terdokumentasi dengan baik. Tim Anda di masa depan akan berterima kasih. Tidak ada jalan pintas technical debt.">
-        Maintainable, well-documented code that your future team will thank you for. No technical debt shortcuts.
-      </div>
-    </div>
-
-    <div class="why-card reveal reveal-delay-2">
-      <div class="why-num">03</div>
-      <div class="why-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="url(#g3)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <defs><linearGradient id="g3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#7B2FBE"/><stop offset="100%" stop-color="#E040FB"/></linearGradient></defs>
-          <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-          <polyline points="3.29 7 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/>
-        </svg>
-      </div>
-      <div class="why-title" data-en="Built to Scale" data-id="Dirancang Skalabel">Built to Scale</div>
-      <div class="why-desc" data-en="Cloud-native architecture designed to handle growth. From 10 users to 100,000 — we architect for scale from the start." data-id="Arsitektur cloud-native dirancang untuk menangani pertumbuhan. Dari 10 pengguna hingga 100.000 — kami merancang untuk skala sejak awal.">
-        Cloud-native architecture designed to handle growth. From 10 users to 100,000 — we architect for scale from the start.
-      </div>
-    </div>
-
-    <div class="why-card reveal reveal-delay-3">
-      <div class="why-num">04</div>
-      <div class="why-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="url(#g4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-          <defs><linearGradient id="g4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00C2CB"/><stop offset="100%" stop-color="#E040FB"/></linearGradient></defs>
-          <path d="M12 2a2 2 0 0 1 2 2c0 .74-.4 1.39-1 1.73V7h1a7 7 0 0 1 7 7h1a1 1 0 0 1 0 2h-1v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1H2a1 1 0 0 1 0-2h1a7 7 0 0 1 7-7h1V5.73c-.6-.34-1-.99-1-1.73a2 2 0 0 1 2-2z"/>
-        </svg>
-      </div>
-      <div class="why-title" data-en="AI-Native Thinking" data-id="Berpikir AI-Native">AI-Native Thinking</div>
-      <div class="why-desc" data-en="We don't bolt AI on — we architect it in. Every system we build considers how AI can make it smarter from the ground up." data-id="Kami tidak sekadar menambahkan AI — kami mengarsitekturnya dari dalam. Setiap sistem mempertimbangkan bagaimana AI dapat membuatnya lebih cerdas.">
-        We don't bolt AI on — we architect it in. Every system we build considers how AI can make it smarter from the ground up.
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── PROCESS ─── -->
-<section id="process">
-  <div class="process-mesh"></div>
-  <div class="section-label reveal" data-en="How We Work" data-id="Cara Kami Bekerja">How We Work</div>
-  <h2 class="section-title reveal reveal-delay-1">
-    <span data-en="From Idea to" data-id="Dari Ide ke">From Idea to</span><br/>
-    <em data-en="Production." data-id="Produksi.">Production.</em>
-  </h2>
-  <p class="section-sub reveal reveal-delay-2" data-en="A proven four-step process that keeps every project on track, on time, and on budget." data-id="Proses empat langkah yang terbukti untuk menjaga setiap proyek tetap on track, on time, dan on budget.">
-    A proven four-step process that keeps every project on track, on time, and on budget.
-  </p>
-
-  <div class="process-steps">
-    <div class="process-step reveal">
-      <div class="step-num">01</div>
-      <div class="step-title" data-en="Discovery" data-id="Riset">Discovery</div>
-      <div class="step-desc" data-en="We dig deep into your goals, users, and technical constraints to define a precise scope." data-id="Kami menggali dalam tujuan, pengguna, dan kendala teknis untuk mendefinisikan scope yang tepat.">
-        We dig deep into your goals, users, and technical constraints to define a precise scope.
-      </div>
-    </div>
-    <div class="process-step reveal reveal-delay-1">
-      <div class="step-num">02</div>
-      <div class="step-title" data-en="Design" data-id="Desain">Design</div>
-      <div class="step-desc" data-en="Architecture, UI/UX wireframes, and tech stack selection — all aligned before a single line of code." data-id="Arsitektur, wireframe UI/UX, dan pemilihan tech stack — semua diselaraskan sebelum satu baris kode pun.">
-        Architecture, UI/UX wireframes, and tech stack selection — all aligned before a single line of code.
-      </div>
-    </div>
-    <div class="process-step reveal reveal-delay-2">
-      <div class="step-num">03</div>
-      <div class="step-title" data-en="Build" data-id="Bangun">Build</div>
-      <div class="step-desc" data-en="Iterative development with regular demos. You see progress weekly — no black-box development." data-id="Pengembangan iteratif dengan demo reguler. Anda melihat progres setiap minggu — tidak ada pengembangan black-box.">
-        Iterative development with regular demos. You see progress weekly — no black-box development.
-      </div>
-    </div>
-    <div class="process-step reveal reveal-delay-3">
-      <div class="step-num">04</div>
-      <div class="step-title" data-en="Launch & Scale" data-id="Rilis & Kembangkan">Launch & Scale</div>
-      <div class="step-desc" data-en="VPS deployment, CI/CD pipelines, monitoring, and ongoing support to keep your product healthy." data-id="Deployment VPS, pipeline CI/CD, monitoring, dan dukungan berkelanjutan untuk menjaga produk Anda sehat.">
-        VPS deployment, CI/CD pipelines, monitoring, and ongoing support to keep your product healthy.
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ─── CTA ─── -->
-<section id="cta">
-  <div class="cta-inner reveal">
-    <div class="cta-label" data-en="Ready to build?" data-id="Siap membangun?">Ready to build?</div>
-    <h2 class="cta-title">
-      <span data-en="Let's Turn Your Idea" data-id="Mari Wujudkan Ide">Let's Turn Your Idea</span><br/>
-      <em data-en="Into Reality." data-id="Menjadi Kenyataan.">Into Reality.</em>
-    </h2>
-    <p class="cta-sub" data-en="Tell us about your project. We'll get back to you within 24 hours." data-id="Ceritakan proyek Anda. Kami akan merespons dalam 24 jam.">
-      Tell us about your project. We'll get back to you within 24 hours.
-    </p>
-    <div class="cta-actions">
-      <a href="mailto:admin@cikal.studio" class="btn-white">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-        <span data-en="Email Us" data-id="Email Kami">Email Us</span>
       </a>
-      <a href="https://wa.me/6208111870347" target="_blank" rel="noopener" class="btn-ghost-white">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-        <span data-en="WhatsApp Us" data-id="WhatsApp Kami">WhatsApp Us</span>
+      <a href="https://tuna.cikal.store" target="_blank" class="port-card reveal reveal-delay-1">
+        <div class="port-body">
+          <div class="port-name">Tuna Dashboard</div>
+          <div class="port-url">tuna.cikal.store</div>
+          <div class="port-desc">Financial reporting PWA for commodity trading — Google Sheets API, real-time cashflow.</div>
+          <div class="port-tags">
+            <span class="port-tag">PWA</span>
+            <span class="port-tag">Google Sheets</span>
+            <span class="port-tag">Finance</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://invoicepro.cikal.store" target="_blank" class="port-card reveal reveal-delay-2">
+        <div class="port-body">
+          <div class="port-name">InvoicePro</div>
+          <div class="port-url">invoicepro.cikal.store</div>
+          <div class="port-desc">Commercial invoicing SaaS with LemonSqueezy monetization, PDF generation, multi-currency.</div>
+          <div class="port-tags">
+            <span class="port-tag">SaaS</span>
+            <span class="port-tag">LemonSqueezy</span>
+            <span class="port-tag">PDF</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://cvbuilder.guidify.app" target="_blank" class="port-card reveal">
+        <div class="port-body">
+          <div class="port-name">CV Builder</div>
+          <div class="port-url">cvbuilder.guidify.app</div>
+          <div class="port-desc">AI-powered CV generator with PDF export, multiple templates, ATS-optimized formatting.</div>
+          <div class="port-tags">
+            <span class="port-tag">AI</span>
+            <span class="port-tag">SaaS</span>
+            <span class="port-tag">PDF</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://invoicemaker.guidify.app" target="_blank" class="port-card reveal reveal-delay-1">
+        <div class="port-body">
+          <div class="port-name">InvoiceMaker</div>
+          <div class="port-url">invoicemaker.guidify.app</div>
+          <div class="port-desc">Professional invoice generation with multi-currency, custom branding, instant PDF download.</div>
+          <div class="port-tags">
+            <span class="port-tag">SaaS Tool</span>
+            <span class="port-tag">Multi-currency</span>
+            <span class="port-tag">SEO</span>
+          </div>
+        </div>
+      </a>
+      <a href="https://globaltax.lifecalc.app" target="_blank" class="port-card reveal reveal-delay-2">
+        <div class="port-body">
+          <div class="port-name">GlobalTax</div>
+          <div class="port-url">globaltax.lifecalc.app</div>
+          <div class="port-desc">Global tax calculator with AdSense monetization, SEO-optimized, country-specific tax rules.</div>
+          <div class="port-tags">
+            <span class="port-tag">AdSense</span>
+            <span class="port-tag">Fintech</span>
+            <span class="port-tag">SEO</span>
+          </div>
+        </div>
       </a>
     </div>
   </div>
 </section>
 
-<!-- ─── FOOTER ─── -->
+<!-- CAPABILITIES -->
+<section class="section" id="capabilities">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">What We Build</div>
+      <h2>Our Core <em style="font-style:normal;" class="gradient-text">Capabilities</em></h2>
+      <p>End-to-end software development — from architecture to deployment. We build systems that are fast, reliable, and built to last.</p>
+    </div>
+    <div class="cap-grid">
+      <div class="cap-card reveal">
+        <div class="cap-icon">🤖</div>
+        <h3>AI-Powered Systems</h3>
+        <p>Multi-agent systems, automation pipelines, and AI-integrated applications. From sales agents to CIO assistants — real AI that works.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">LLM Integration</span>
+          <span class="cap-tag">Multi-Agent</span>
+          <span class="cap-tag">Claude</span>
+          <span class="cap-tag">Gemini</span>
+          <span class="cap-tag">RAG</span>
+        </div>
+      </div>
+      <div class="cap-card reveal reveal-delay-1">
+        <div class="cap-icon">⛓️</div>
+        <h3>Blockchain & Web3</h3>
+        <p>Smart contracts, token launches, DEX, NFT collections, and full crypto ecosystems. Solidity on BSC, ETH, and Polygon.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">Solidity</span>
+          <span class="cap-tag">BEP-20</span>
+          <span class="cap-tag">ERC-20</span>
+          <span class="cap-tag">DEX</span>
+          <span class="cap-tag">NFT</span>
+        </div>
+      </div>
+      <div class="cap-card reveal reveal-delay-2">
+        <div class="cap-icon">🚀</div>
+        <h3>SaaS Platforms</h3>
+        <p>Multi-tenant architecture, subscription billing, admin dashboards — production-ready SaaS from day one.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">FastAPI</span>
+          <span class="cap-tag">Next.js</span>
+          <span class="cap-tag">PostgreSQL</span>
+          <span class="cap-tag">Redis</span>
+        </div>
+      </div>
+      <div class="cap-card reveal">
+        <div class="cap-icon">📊</div>
+        <h3>Dashboard & Analytics</h3>
+        <p>Real-time monitoring dashboards, business intelligence tools, and actionable data visualizations.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">Real-time</span>
+          <span class="cap-tag">Charts</span>
+          <span class="cap-tag">Reports</span>
+          <span class="cap-tag">PWA</span>
+        </div>
+      </div>
+      <div class="cap-card reveal reveal-delay-1">
+        <div class="cap-icon">🔗</div>
+        <h3>API & Integrations</h3>
+        <p>RESTful APIs, third-party integrations, webhooks, and data pipelines that connect your entire ecosystem.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">REST</span>
+          <span class="cap-tag">GraphQL</span>
+          <span class="cap-tag">Webhook</span>
+          <span class="cap-tag">WhatsApp API</span>
+        </div>
+      </div>
+      <div class="cap-card reveal reveal-delay-2">
+        <div class="cap-icon">💼</div>
+        <h3>CRM & Automation</h3>
+        <p>Lead management, automated outreach, pipeline tracking, and B2B sales agent systems that convert.</p>
+        <div class="cap-tags">
+          <span class="cap-tag">CRM</span>
+          <span class="cap-tag">Lead Gen</span>
+          <span class="cap-tag">WhatsApp</span>
+          <span class="cap-tag">Automation</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="section" id="why">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">Why Cikal Studio</div>
+      <h2>Built Different. <span class="gradient-text">Delivered Different.</span></h2>
+      <p>We're not the cheapest, and not the most expensive. We're the best value — because we ship real products.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-num">01</div>
+        <div>
+          <h3>Proof, Not Promise</h3>
+          <p>$YFIN ecosystem is our live portfolio — 10 products, audited, real users. Not mockups. Not demos. Real production software you can click right now.</p>
+        </div>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-num">02</div>
+        <div>
+          <h3>Fast Delivery</h3>
+          <p>We ship fast without cutting corners. MVPs in weeks, not months. Every deadline is a commitment, not a suggestion.</p>
+        </div>
+      </div>
+      <div class="why-card reveal">
+        <div class="why-num">03</div>
+        <div>
+          <h3>AI-Native Thinking</h3>
+          <p>We don't bolt AI on — we architect it in. Every system considers how AI can make it smarter from the ground up.</p>
+        </div>
+      </div>
+      <div class="why-card reveal reveal-delay-1">
+        <div class="why-num">04</div>
+        <div>
+          <h3>Direct Founder Access</h3>
+          <p>You work directly with Ahmad Riyadi — the founder and lead developer. No account managers, no handoffs, no miscommunication.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">How We Work</div>
+      <h2>From Idea to <span class="gradient-text">Production.</span></h2>
+      <p>A proven four-step process that keeps every project on track, on time, and on budget.</p>
+    </div>
+    <div class="process-grid">
+      <div class="proc-card reveal">
+        <div class="proc-num">01</div>
+        <h3>Discovery</h3>
+        <p>We dig deep into your goals, users, and technical constraints to define a precise scope.</p>
+      </div>
+      <div class="proc-card reveal reveal-delay-1">
+        <div class="proc-num">02</div>
+        <h3>Design</h3>
+        <p>Architecture, UI/UX wireframes, and tech stack selection — all aligned before a single line of code.</p>
+      </div>
+      <div class="proc-card reveal reveal-delay-2">
+        <div class="proc-num">03</div>
+        <h3>Build</h3>
+        <p>Iterative development with regular demos. You see progress weekly — no black-box development.</p>
+      </div>
+      <div class="proc-card reveal reveal-delay-3">
+        <div class="proc-num">04</div>
+        <h3>Launch & Scale</h3>
+        <p>VPS deployment, CI/CD pipelines, monitoring, and ongoing support to keep your product healthy.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section" id="cta">
+  <div class="container">
+    <div class="cta-section reveal">
+      <h2>Let's Turn Your Idea<br/><span class="gradient-text">Into Reality.</span></h2>
+      <p>Tell us about your project. We'll get back to you within 24 hours with a clear plan and honest pricing.</p>
+      <div class="cta-btns">
+        <a href="https://wa.me/6208111870347" target="_blank" rel="noopener" class="btn-wa">
+          💬 WhatsApp Us Now
+        </a>
+        <a href="mailto:admin@cikal.studio" class="btn-secondary">
+          ✉️ Email Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <a href="#hero" class="footer-logo">
-      <img src="images/logo.png" alt="Cikal Studio" onerror="this.style.display='none'"/>
-      <div class="footer-logo-name">Cikal Studio Labs</div>
+      <img src="images/logo.png" alt="Cikal Studio Labs" />
+      <span>Cikal Studio Labs</span>
     </a>
     <div class="footer-links">
-      <a href="#capabilities" data-en="Capabilities" data-id="Layanan">Capabilities</a>
-      <a href="#why" data-en="Why Us" data-id="Keunggulan">Why Us</a>
-      <a href="#process" data-en="Process" data-id="Proses">Process</a>
+      <a href="#capabilities">Capabilities</a>
+      <a href="#yfin">$YFIN</a>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#why">Why Us</a>
+      <a href="token-launch.html">Token Launch</a>
       <a href="mailto:admin@cikal.studio">admin@cikal.studio</a>
-      <a href="token-launch.html" style="color:#00C2CB;">🚀 Token Launch</a>
     </div>
-    <div class="footer-copy">© 2026 Cikal Studio Labs · Built by Ahmad Riyadi</div>
+    <div class="footer-right">© 2026 Cikal Studio Labs · Ahmad Riyadi</div>
   </div>
 </footer>
 
-<!-- ─── WA FLOATING BUTTON ─── -->
-<a href="https://wa.me/6208111870347" target="_blank" rel="noopener" class="wa-float" aria-label="Chat via WhatsApp">
-  <div class="wa-pulse"></div>
-  <div class="wa-tooltip" data-en="Chat with us!" data-id="Chat dengan kami!">Chat with us!</div>
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
-</a>
+<!-- WA Float -->
+<a href="https://wa.me/6208111870347" target="_blank" rel="noopener" class="wa-float" aria-label="Chat via WhatsApp">💬</a>
 
-<!-- ─── SCRIPTS ─── -->
 <script>
-// ── LANGUAGE TOGGLE ──
-const langBtns = document.querySelectorAll('.lang-btn');
-let currentLang = 'en';
-
-function applyLanguage(lang) {
-  currentLang = lang;
-  document.querySelectorAll('[data-en]').forEach(el => {
-    el.textContent = el.getAttribute('data-' + lang);
-  });
-  langBtns.forEach(b => {
-    b.classList.toggle('active', b.dataset.lang === lang);
-  });
-  document.documentElement.lang = lang;
-}
-
-langBtns.forEach(btn => {
-  btn.addEventListener('click', () => applyLanguage(btn.dataset.lang));
-});
-
-// ── NAVBAR SCROLL ──
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 20);
-}, { passive: true });
-
-// ── HAMBURGER MENU ──
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.querySelector('.nav-links');
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('active');
-  navLinks.classList.toggle('open');
-});
-navLinks.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    hamburger.classList.remove('active');
-    navLinks.classList.remove('open');
-  });
-});
-
-// ── SCROLL REVEAL ──
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      observer.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-reveals.forEach(r => observer.observe(r));
-
-// ── COUNTER ANIMATION ──
-function animateCounter(el) {
-  const target = parseInt(el.dataset.target);
-  const duration = 1800;
-  const start = performance.now();
-  const easeOut = t => 1 - Math.pow(1 - t, 3);
-
-  function update(now) {
-    const elapsed = now - start;
-    const progress = Math.min(elapsed / duration, 1);
-    el.textContent = Math.floor(easeOut(progress) * target);
-    if (progress < 1) requestAnimationFrame(update);
-    else el.textContent = target;
+  // Mobile menu
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.textContent = menu.classList.contains('open') ? '✕' : '☰';
   }
-  requestAnimationFrame(update);
-}
 
-const counters = document.querySelectorAll('.counter');
-const counterObserver = new IntersectionObserver((entries) => {
-  entries.forEach(e => {
-    if (e.isIntersecting) {
-      animateCounter(e.target);
-      counterObserver.unobserve(e.target);
-    }
-  });
-}, { threshold: 0.5 });
-counters.forEach(c => counterObserver.observe(c));
+  // Counter animation
+  function animateCounter(el) {
+    const target = parseInt(el.getAttribute('data-count'));
+    if (!target) return;
+    const suffix = el.textContent.includes('+') ? '+' : '';
+    let current = 0;
+    const step = Math.ceil(target / 30);
+    const timer = setInterval(() => {
+      current = Math.min(current + step, target);
+      el.textContent = current + '+';
+      if (current >= target) clearInterval(timer);
+    }, 40);
+  }
 
-// ── BENTO CARD TILT ──
-document.querySelectorAll('.bento-card').forEach(card => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const cx = rect.width / 2;
-    const cy = rect.height / 2;
-    const tiltX = ((y - cy) / cy) * 3;
-    const tiltY = ((cx - x) / cx) * 3;
-    card.style.transform = `perspective(800px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-3px)`;
-  });
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
-  });
-});
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        // Trigger counter if applicable
+        const counter = entry.target.querySelector('[data-count]');
+        if (counter) animateCounter(counter);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
 
-// ── SMOOTH ANCHOR SCROLL ──
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const target = document.querySelector(a.getAttribute('href'));
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  // Also trigger counters in hero (already visible)
+  document.querySelectorAll('[data-count]').forEach(el => {
+    animateCounter(el);
   });
-});
 </script>
 </body>
 </html>
