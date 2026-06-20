@@ -11,13 +11,32 @@
   gtag('config', 'AW-18255068707');
 </script>
 
+<!-- Event snippet for Contact conversion page -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-18255068707/UwAACL--j8IcEKP82IBE',
+      'value': 1.0,
+      'currency': 'IDR',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+
+
 <meta charset="UTF-8"/>
 <meta name="google-site-verification" content="-POpHPgUeZeCtRURK8JKjmXbCRkWH8gEPpSOim4UIfg" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Token Launch Service — Cikal Studio Labs</title>
-<meta name="description" content="End-to-end crypto token launch service. Smart contract, tokenomics, DEX listing, whitepaper, and CEX support. Backed by real portfolio: $YFIN token."/>
+<meta name="description" content="Token launch development services. Smart contract development, tokenomics design, DEX integration, technical documentation. Backed by real portfolio: $YFIN token."/>
 <meta property="og:title" content="Token Launch Service — Cikal Studio Labs"/>
-<meta property="og:description" content="From smart contract to CEX listing. We build and launch your crypto token — end to end."/>
+<meta property="og:description" content="From smart contract development to DEX integration. We help businesses build and deploy token projects — end to end."/>
 <meta property="og:url" content="https://www.cikal.studio/token-launch"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -730,7 +749,7 @@
     <li><a href="/">← Main Site</a></li>
     <li><a href="token-launch-id.html" style="font-family:'DM Mono',monospace; font-size:0.75rem; color:var(--cyan); border:1px solid rgba(0,194,203,0.3); padding:4px 10px; border-radius:99px;">🇮🇩 Bahasa</a></li>
   </ul>
-  <a href="https://wa.me/6208111870347" class="btn-primary">
+  <a href="https://wa.me/6208111870347" onclick="return gtag_report_conversion('https://wa.me/6208111870347');" class="btn-primary">
     Get Started
     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
   </a>
@@ -743,10 +762,10 @@
       <span></span>
       Token Launch Service · Cikal Studio Labs
     </div>
-    <h1>Launch Your Crypto Token<br><em>End to End.</em></h1>
-    <p class="hero-sub">From smart contract to CEX listing — we design, build, and deploy your token. Real portfolio, proven process, Southeast Asia → Global.</p>
+    <h1>Token Launch Development<br><em>End to End.</em></h1>
+    <p class="hero-sub">From smart contract development to DEX integration — we design, build, and deploy your token project. Real portfolio, proven process, Southeast Asia → Global.</p>
     <div class="hero-btns">
-      <a href="https://wa.me/6208111870347" class="btn-gold">
+      <a href="https://wa.me/6208111870347" onclick="return gtag_report_conversion('https://wa.me/6208111870347');" class="btn-gold">
         Start a Project
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
@@ -853,7 +872,7 @@
             <li><span class="check">✓</span> Basic 1-page landing page</li>
             <li><span class="check">✓</span> Contract verified on BscScan/Etherscan</li>
           </ul>
-          <a href="https://wa.me/6208111870347?text=Hi%2C%20I'm%20interested%20in%20the%20Starter%20Token%20package" class="pkg-cta">Get Started →</a>
+          <a href="https://wa.me/6208111870347?text=Hi%2C%20I'm%20interested%20in%20the%20Starter%20Token%20package" onclick="return gtag_report_conversion('https://wa.me/6208111870347?text=Hi%2C%20I\'m%20interested%20in%20the%20Starter%20Token%20package');" class="pkg-cta">Get Started →</a>
         </div>
       </div>
 
@@ -879,7 +898,7 @@
             <li><span class="check">✓</span> CoinMarketCap main submission</li>
             <li><span class="check">✓</span> 1 revision round included</li>
           </ul>
-          <a href="https://wa.me/6208111870347?text=Hi%2C%20I'm%20interested%20in%20the%20Pro%20Launch%20package" class="pkg-cta">Get Started →</a>
+          <a href="https://wa.me/6208111870347?text=Hi%2C%20I'm%20interested%20in%20the%20Pro%20Launch%20package" onclick="return gtag_report_conversion('https://wa.me/6208111870347?text=Hi%2C%20I\'m%20interested%20in%20the%20Pro%20Launch%20package');" class="pkg-cta">Get Started →</a>
         </div>
       </div>
 
@@ -904,7 +923,7 @@
             <li><span class="check">✓</span> 30-day post-launch support</li>
             <li><span class="check">✓</span> Dedicated Telegram support line</li>
           </ul>
-          <a href="https://wa.me/6208111870347?text=Hi%2C%20I'm%20interested%20in%20the%20Full%20Ecosystem%20package" class="pkg-cta">Get Started →</a>
+          <a href="https://wa.me/6208111870347?text=Hi%2C%20I'm%20interested%20in%20the%20Full%20Ecosystem%20package" onclick="return gtag_report_conversion('https://wa.me/6208111870347?text=Hi%2C%20I\'m%20interested%20in%20the%20Full%20Ecosystem%20package');" class="pkg-cta">Get Started →</a>
         </div>
       </div>
 
@@ -1111,7 +1130,7 @@
     <h2 class="section-h">Let's Build Your <em>Token.</em></h2>
     <p class="section-sub">Free 30-minute consultation. We'll review your project idea, suggest the right package, and give you a clear cost breakdown — no commitment required.</p>
     <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:32px;">
-      <a href="https://wa.me/6208111870347?text=Hi%2C%20I'd%20like%20to%20discuss%20a%20token%20launch%20project" class="btn-gold">
+      <a href="https://wa.me/6208111870347?text=Hi%2C%20I'd%20like%20to%20discuss%20a%20token%20launch%20project" onclick="return gtag_report_conversion('https://wa.me/6208111870347?text=Hi%2C%20I\'d%20like%20to%20discuss%20a%20token%20launch%20project');" class="btn-gold">
         WhatsApp Us Now
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </a>
@@ -1152,7 +1171,7 @@
 </footer>
 
 <!-- ─── WA FLOAT ─── -->
-<a href="https://wa.me/6208111870347" target="_blank" rel="noopener" class="wa-float" aria-label="Chat via WhatsApp">
+<a href="https://wa.me/6208111870347" onclick="return gtag_report_conversion('https://wa.me/6208111870347');" target="_blank" rel="noopener" class="wa-float" aria-label="Chat via WhatsApp">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
 </a>
 
