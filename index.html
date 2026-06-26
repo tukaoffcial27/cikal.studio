@@ -145,15 +145,14 @@
 
     /* ── LANG SWITCHER ── */
     .lang-switcher {
-      position: fixed; top: 16px; right: 80px; z-index: 1000;
-      display: flex; gap: 4px; align-items: center;
+      display: flex; gap: 4px; align-items: center; margin-left: 8px;
     }
     .lang-btn {
-      padding: 4px 10px; border-radius: 6px; font-size: 12px;
+      padding: 4px 10px; border-radius: 6px; font-size: 11px;
       font-family: 'JetBrains Mono', monospace; font-weight: 600;
       cursor: pointer; border: 1px solid var(--slate);
       background: var(--navy-3); color: var(--text-3);
-      transition: all 0.2s; text-transform: uppercase;
+      transition: all 0.2s; text-transform: uppercase; line-height: 1;
     }
     .lang-btn.active { background: var(--cyan); color: var(--navy-1); border-color: var(--cyan); }
     .lang-btn:hover:not(.active) { border-color: var(--cyan); color: var(--cyan); }
@@ -179,7 +178,7 @@
     .mobile-menu a { padding: 10px 0; color: var(--text-2); text-decoration: none; font-size: 15px; border-bottom: 1px solid var(--slate); }
     .mobile-cta-wrap { padding-top: 12px; }
     .mobile-cta-wrap a { background: var(--cyan); color: var(--navy-1) !important; padding: 12px 24px; border-radius: 10px; font-weight: 700; display: block; text-align: center; border: none; }
-    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } .lang-switcher { right: 56px; top: 14px; } }
+    @media (max-width: 768px) { .nav-links { display: none; } .hamburger { display: block; } .lang-switcher { margin-left: auto; margin-right: 8px; } }
 
     /* ── BUTTONS ── */
     .btn-primary { display: inline-flex; align-items: center; gap: 6px; padding: 12px 26px; background: linear-gradient(135deg, var(--cyan), var(--purple)); color: white !important; font-weight: 700; border-radius: 10px; text-decoration: none; font-size: 15px; font-family: 'Syne', sans-serif; transition: opacity 0.2s, transform 0.2s; }
@@ -371,12 +370,6 @@
 </head>
 <body class="lang-id">
 
-<!-- LANG SWITCHER -->
-<div class="lang-switcher">
-  <button class="lang-btn" id="btn-id" onclick="setLang('id')">ID</button>
-  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
-</div>
-
 <!-- NAV -->
 <nav id="navbar">
   <div class="nav-inner">
@@ -396,6 +389,10 @@
         <span data-lang="en">Let's Talk</span><span data-lang="id">Hubungi Kami</span>
       </a></li>
     </ul>
+    <div class="lang-switcher">
+      <button class="lang-btn" id="btn-id" onclick="setLang('id')">ID</button>
+      <button class="lang-btn active" id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
     <button class="hamburger" id="hamburger" onclick="toggleMenu()">☰</button>
   </div>
   <div class="mobile-menu" id="mobileMenu">
