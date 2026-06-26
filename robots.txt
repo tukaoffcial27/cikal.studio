@@ -1,4 +1,9 @@
 User-agent: *
 Allow: /
 
+# Sitemap
 Sitemap: https://www.cikal.studio/sitemap.xml
+
+# Block private/system files
+Disallow: /.git/
+Disallow: /node_modules/
