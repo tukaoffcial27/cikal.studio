@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Building a Multi-Agent AI System in Python: Architecture & Real Examples | Cikal Studio Labs</title>
+<meta name="description" content="How to design, coordinate, and deploy a multi-agent AI pipeline using Claude and FastAPI — with real production examples from Cikal Studio Labs projects including Listing Radar and Resply.">
+<link rel="canonical" href="https://www.cikal.studio/blog/en/multi-agent-ai-system-python.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Building a Multi-Agent AI System in Python: Architecture & Real Examples","datePublished":"2026-06-26","author":{"@type":"Person","name":"Ahmad Riyadi"},"publisher":{"@type":"Organization","name":"Cikal Studio Labs","url":"https://www.cikal.studio/"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--navy-1:#080C18;--navy-2:#0D1220;--navy-3:#111827;--slate:rgba(255,255,255,0.07);--text:#F0F4FF;--text-2:#8B95B0;--text-3:#4B5470;--cyan:#00C2CB;--purple:#7B3FE4;--green:#22D48A;--gold:#C9A84C}body{background:var(--navy-1);color:var(--text);font-family:Inter,sans-serif;line-height:1.6}nav{background:rgba(8,12,24,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--slate);padding:0 24px;position:sticky;top:0;z-index:99}.nav-inner{max-width:800px;margin:0 auto;height:64px;display:flex;align-items:center;gap:16px}.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}.nav-logo img{width:28px;height:28px;border-radius:6px}.nav-logo span{font-family:Syne,sans-serif;font-weight:700;font-size:15px;color:var(--text)}.nav-logo em{font-style:normal;color:var(--cyan)}.nav-links{margin-left:auto;display:flex;gap:16px}.nav-links a{font-size:13px;color:var(--text-3);text-decoration:none}.nav-links a:hover{color:var(--cyan)}.article-wrap{max-width:800px;margin:0 auto;padding:48px 24px 80px}.article-header{margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--slate)}.breadcrumb{font-size:12px;color:var(--text-3);font-family:JetBrains Mono,monospace;margin-bottom:20px}.breadcrumb a{color:var(--cyan);text-decoration:none}.art-badges{display:flex;gap:8px;margin-bottom:16px}.badge{font-size:10px;padding:3px 9px;border-radius:5px;font-family:JetBrains Mono,monospace;font-weight:600;text-transform:uppercase}.badge-en{background:rgba(0,194,203,0.1);border:1px solid rgba(0,194,203,0.2);color:var(--cyan)}.badge-cat{background:rgba(123,63,228,0.1);border:1px solid rgba(123,63,228,0.2);color:var(--purple)}h1{font-family:Syne,sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;margin-bottom:16px;color:var(--text)}.art-meta{font-size:12px;color:var(--text-3);font-family:JetBrains Mono,monospace;display:flex;gap:16px;flex-wrap:wrap}.art-intro{font-size:16px;color:var(--text-2);line-height:1.75;margin-bottom:40px;padding:24px;background:var(--navy-3);border-left:3px solid var(--cyan);border-radius:0 12px 12px 0}.article-body h2{font-family:Syne,sans-serif;font-size:24px;font-weight:700;margin:40px 0 16px;color:var(--text)}.article-body h3{font-family:Syne,sans-serif;font-size:18px;font-weight:700;margin:28px 0 12px;color:var(--cyan)}.article-body p{font-size:15px;color:var(--text-2);line-height:1.8;margin-bottom:16px}.article-body ul,.article-body ol{margin:16px 0 20px 24px;color:var(--text-2);font-size:15px;line-height:1.8}.article-body li{margin-bottom:8px}.article-body strong{color:var(--text);font-weight:600}.article-body code{font-family:JetBrains Mono,monospace;font-size:13px;background:var(--navy-3);padding:2px 7px;border-radius:4px;color:var(--cyan);border:1px solid var(--slate)}.code-block{background:var(--navy-2);border:1px solid var(--slate);border-radius:12px;padding:20px 24px;margin:20px 0;overflow-x:auto}.code-block pre{font-family:JetBrains Mono,monospace;font-size:13px;color:#A8C8FF;line-height:1.6}.callout{background:rgba(0,194,203,0.06);border:1px solid rgba(0,194,203,0.2);border-radius:12px;padding:20px 24px;margin:24px 0}.callout-gold{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.2)}.callout p{margin:0;font-size:14px;color:var(--text-2)}.callout strong{color:var(--cyan)}.callout-gold strong{color:var(--gold)}.art-cta{background:linear-gradient(135deg,rgba(0,194,203,0.08),rgba(123,63,228,0.08));border:1px solid rgba(0,194,203,0.2);border-radius:16px;padding:32px;text-align:center;margin-top:48px}.art-cta h3{font-family:Syne,sans-serif;font-size:22px;font-weight:700;margin-bottom:10px}.art-cta p{font-size:14px;color:var(--text-2);margin-bottom:20px}.btn-wa{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:#25D366;color:white;font-weight:700;border-radius:10px;text-decoration:none;font-size:14px}.related{margin-top:48px;padding-top:32px;border-top:1px solid var(--slate)}.related h3{font-family:Syne,sans-serif;font-size:18px;font-weight:700;margin-bottom:20px}.related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.related-card{background:var(--navy-3);border:1px solid var(--slate);border-radius:12px;padding:16px;text-decoration:none;display:block;transition:all 0.2s}.related-card:hover{border-color:rgba(0,194,203,0.3)}.related-card .rc-cat{font-size:10px;font-family:JetBrains Mono,monospace;color:var(--purple);text-transform:uppercase;margin-bottom:6px}.related-card h4{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}footer{border-top:1px solid var(--slate);padding:24px;text-align:center}footer a{color:var(--text-3);font-size:13px;text-decoration:none;margin:0 10px}footer a:hover{color:var(--cyan)}footer p{font-size:11px;color:var(--text-3);margin-top:10px;font-family:JetBrains Mono,monospace}@media(max-width:600px){.related-grid{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a href="../../" class="nav-logo"><img src="../../images/logo.png" alt="Cikal Studio Labs"><span>Cikal Studio <em>Labs</em></span></a>
+  <div class="nav-links"><a href="../">← Blog</a><a href="https://wa.me/628118885567" target="_blank">Contact</a></div>
+</div></nav>
+<div class="article-wrap">
+  <div class="article-header">
+    <div class="breadcrumb"><a href="../../">Home</a> / <a href="../">Blog</a> / AI Systems</div>
+    <div class="art-badges"><span class="badge badge-en">EN</span><span class="badge badge-cat">AI Systems</span></div>
+    <h1>Building a Multi-Agent AI System in Python: Architecture & Real Examples</h1>
+    <div class="art-meta"><span>📅 June 26, 2026</span><span>⏱ 13 min read</span><span>✍️ Ahmad Riyadi, Cikal Studio Labs</span></div>
+  </div>
+  <div class="art-intro">
+    A single LLM call is powerful. A coordinated system of specialized AI agents — each with distinct roles, tools, and context windows — is transformative. This guide covers architecture patterns we've battle-tested in production, including Listing Radar (crypto intelligence) and Resply (WhatsApp AI sales).
+  </div>
+  <div class="article-body">
+    <h2>Why Multi-Agent Over Single-Agent?</h2>
+    <p>Single-agent systems hit ceilings when tasks require:</p>
+    <ul>
+      <li>Processing multiple information streams in parallel</li>
+      <li>Different models optimized for different subtasks (expensive model for reasoning, cheap model for classification)</li>
+      <li>Cross-validation — one agent checking another's work</li>
+      <li>Specialization — a research agent, a risk agent, a writing agent, each with domain-specific prompts</li>
+      <li>Tasks too large for a single context window</li>
+    </ul>
+
+    <h2>Architecture Pattern 1: Pipeline (Sequential)</h2>
+    <p>Each agent's output becomes the next agent's input. Clean, predictable, easy to debug.</p>
+    <div class="code-block"><pre>import asyncio
+import anthropic
+
+client = anthropic.Anthropic()
+
+class PipelineAgent:
+    def __init__(self, name: str, system_prompt: str):
+        self.name = name
+        self.system_prompt = system_prompt
+
+    async def process(self, input_text: str) -> str:
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=1000,
+            system=self.system_prompt,
+            messages=[{"role": "user", "content": input_text}]
+        )
+        return response.content[0].text
+
+class IntelligencePipeline:
+    def __init__(self):
+        self.agents = [
+            PipelineAgent("researcher", "You gather and summarize raw information."),
+            PipelineAgent("analyst", "You analyze data and identify patterns and insights."),
+            PipelineAgent("writer", "You write clear, actionable reports from analysis."),
+            PipelineAgent("reviewer", "You review reports for accuracy and completeness.")
+        ]
+
+    async def run(self, query: str) -> str:
+        result = query
+        for agent in self.agents:
+            print(f"Running {agent.name}...")
+            result = await agent.process(result)
+        return result</pre></div>
+
+    <h2>Architecture Pattern 2: Supervisor-Worker</h2>
+    <p>A supervisor agent decomposes tasks and delegates to specialized workers. Best for complex workflows with dynamic task allocation.</p>
+    <div class="code-block"><pre>class SupervisorAgent:
+    def __init__(self):
+        self.workers = {
+            "research": ResearchAgent(),
+            "code_review": CodeAgent(),
+            "risk_analysis": RiskAgent(),
+            "write": WriterAgent()
+        }
+
+    async def run(self, task: str) -> str:
+        # Supervisor plans which agents to use
+        plan_response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=500,
+            system="""You are a task planner. Given a task, output a JSON plan.
+            Available workers: research, code_review, risk_analysis, write
+            Output: {"steps": [{"agent": "name", "task": "specific subtask"}]}""",
+            messages=[{"role": "user", "content": f"Plan this task: {task}"}]
+        )
+
+        plan = json.loads(plan_response.content[0].text)
+        results = []
+
+        for step in plan["steps"]:
+            worker = self.workers[step["agent"]]
+            result = await worker.run(step["task"])
+            results.append({"agent": step["agent"], "result": result})
+
+        # Supervisor synthesizes
+        synthesis = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=1000,
+            system="Synthesize these agent outputs into a coherent final answer.",
+            messages=[{"role": "user", "content": str(results)}]
+        )
+        return synthesis.content[0].text</pre></div>
+
+    <h2>Real Example: Listing Radar AI</h2>
+    <p>Listing Radar monitors crypto exchange announcements for trading opportunities. Our 4-agent pipeline:</p>
+    <div class="code-block"><pre>class ListingRadarPipeline:
+    """
+    Monitor → Intelligence (Claude Sonnet) → Risk (Gemini Flash) → CEO (Claude Sonnet)
+    """
+    async def analyze_announcement(self, announcement: str) -> dict:
+        # Agent 1: Intelligence Analysis (Claude — needs reasoning)
+        intelligence = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=800,
+            system="Analyze crypto listing announcements. Extract: token, exchange, listing date, price action pattern, market cap estimate.",
+            messages=[{"role": "user", "content": announcement}]
+        )
+
+        # Agent 2: Risk Assessment (Gemini Flash — cheaper for classification)
+        risk = await gemini_client.generate(
+            model="gemini-2.0-flash",
+            prompt=f"Rate risk 1-10 for this listing opportunity: {intelligence.content[0].text}. Output JSON: {{risk_score, reasons}}"
+        )
+
+        # Agent 3: CEO Decision (Claude — final high-stakes reasoning)
+        decision = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=500,
+            system="You are a crypto trading CEO. Make final trade decisions. Be concise and direct.",
+            messages=[{"role": "user", "content": f"Intelligence: {intelligence.content[0].text}\nRisk: {risk}\nDecision?"}]
+        )
+
+        return {
+            "intelligence": intelligence.content[0].text,
+            "risk": json.loads(risk),
+            "decision": decision.content[0].text
+        }</pre></div>
+
+    <div class="callout callout-gold">
+      <p><strong>Cost optimization:</strong> We use Gemini Flash-Lite for simple classification tasks (~10x cheaper than Claude Sonnet). Only expensive models where complex reasoning actually matters. On 1000 analyses/day, this difference is significant.</p>
+    </div>
+
+    <h2>Pattern 3: Parallel with Aggregation</h2>
+    <p>Multiple agents run simultaneously on different aspects, results aggregated at the end.</p>
+    <div class="code-block"><pre>async def parallel_research(topic: str) -> dict:
+    """Run 4 specialized agents in parallel, combine results."""
+    tasks = [
+        market_agent.research(topic),
+        technical_agent.research(topic),
+        competitor_agent.research(topic),
+        regulatory_agent.research(topic)
+    ]
+
+    # asyncio.gather runs all in parallel
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    # Filter out any failures
+    valid_results = [r for r in results if not isinstance(r, Exception)]
+
+    # Aggregate with a synthesis agent
+    aggregated = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=1500,
+        system="Synthesize these parallel research results into a comprehensive report.",
+        messages=[{"role": "user", "content": str(valid_results)}]
+    )
+    return aggregated.content[0].text</pre></div>
+
+    <h2>State Management Between Agents</h2>
+    <p>Agents need shared state. Our pattern: PostgreSQL for persistence, Redis for ephemeral session state.</p>
+    <div class="code-block"><pre>import redis.asyncio as redis
+import json
+
+class AgentState:
+    def __init__(self, session_id: str):
+        self.session_id = session_id
+        self.redis = redis.from_url("redis://localhost")
+
+    async def set(self, key: str, value: any, ttl: int = 3600):
+        await self.redis.setex(
+            f"agent:{self.session_id}:{key}",
+            ttl,
+            json.dumps(value, default=str)
+        )
+
+    async def get(self, key: str) -> any:
+        data = await self.redis.get(f"agent:{self.session_id}:{key}")
+        return json.loads(data) if data else None
+
+    async def append_history(self, agent_name: str, output: str):
+        """Track agent execution history for debugging."""
+        history_key = f"agent:{self.session_id}:history"
+        current = await self.get("history") or []
+        current.append({"agent": agent_name, "output": output[:500]})
+        await self.set("history", current)</pre></div>
+
+    <h2>Cost Management Rules</h2>
+    <ul>
+      <li>Use Gemini Flash or GPT-4o-mini for classification, filtering, and simple yes/no decisions</li>
+      <li>Cache LLM responses for identical inputs in Redis (1-hour TTL for stable info)</li>
+      <li>Implement circuit breakers — if an agent fails 3× consecutively, fall back to simpler logic</li>
+      <li>Set token budgets per agent — don't let one verbose agent blow your cost ceiling</li>
+      <li>Log every API call with estimated cost for monitoring dashboards</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Real cost numbers:</strong> Our Listing Radar analyzes ~200 announcements/day. Using Claude Sonnet for analysis + Gemini Flash for risk scoring: ~$8/day. If we used Claude Sonnet for everything: ~$35/day. The hybrid approach saves $810/month at this volume.</p>
+    </div>
+
+    <h2>Error Handling & Resilience</h2>
+    <div class="code-block"><pre>import asyncio
+from tenacity import retry, stop_after_attempt, wait_exponential
+
+class ResilientAgent:
+    @retry(
+        stop=stop_after_attempt(3),
+        wait=wait_exponential(multiplier=1, min=2, max=10)
+    )
+    async def run_with_retry(self, prompt: str) -> str:
+        try:
+            response = client.messages.create(
+                model="claude-sonnet-4-6",
+                max_tokens=1000,
+                messages=[{"role": "user", "content": prompt}]
+            )
+            return response.content[0].text
+        except anthropic.RateLimitError:
+            print("Rate limited, retrying...")
+            raise  # tenacity will retry
+        except anthropic.APIError as e:
+            print(f"API error: {e}")
+            return f"Error: {str(e)}"  # don't retry on non-rate-limit errors</pre></div>
+  </div>
+  <div class="art-cta">
+    <h3>Need a Multi-Agent AI System Built?</h3>
+    <p>We design and build production-ready multi-agent pipelines — from simple automation to complex intelligence systems.</p>
+    <a href="https://wa.me/628118885567" target="_blank" class="btn-wa">💬 Talk to Us on WhatsApp</a>
+  </div>
+  <div class="related">
+    <h3>Related Articles</h3>
+    <div class="related-grid">
+      <a href="../id/panduan-ai-agent-bisnis-indonesia.html" class="related-card"><div class="rc-cat">AI Systems · ID</div><h4>Panduan AI Agent untuk Bisnis Indonesia</h4></a>
+      <a href="../id/cara-membuat-saas-indonesia.html" class="related-card"><div class="rc-cat">SaaS · ID</div><h4>Cara Membuat Aplikasi SaaS untuk Pasar Indonesia</h4></a>
+      <a href="yfin-ecosystem-case-study.html" class="related-card"><div class="rc-cat">Case Study</div><h4>Building $YFIN DeFi Ecosystem in 6 Months</h4></a>
+      <a href="../id/nextjs-fastapi-saas-stack-indonesia.html" class="related-card"><div class="rc-cat">SaaS · ID</div><h4>Stack Terbaik SaaS 2025: Next.js + FastAPI</h4></a>
+    </div>
+  </div>
+</div>
+<footer><a href="../../">Home</a><a href="../">Blog</a><a href="../../token-launch.html">Token Launch</a><a href="https://wa.me/628118885567">WhatsApp</a><p>© 2026 Cikal Studio Labs · Ahmad Riyadi · Jakarta</p></footer>
+</body></html>

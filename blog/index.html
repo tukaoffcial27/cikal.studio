@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog — Cikal Studio Labs | Tutorial Software, Blockchain & AI Indonesia</title>
+  <meta name="description" content="Artikel teknis, tutorial, dan case study tentang software development, blockchain, token launch, SaaS, dan AI systems dari Cikal Studio Labs Jakarta." />
+  <link rel="canonical" href="https://www.cikal.studio/blog/" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:title" content="Blog Cikal Studio Labs — Tutorial Software, Blockchain & AI" />
+  <meta property="og:description" content="Artikel teknis dan case study dari software agency Jakarta." />
+  <meta property="og:url" content="https://www.cikal.studio/blog/" />
+  <meta property="og:type" content="website" />
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"Blog","name":"Cikal Studio Labs Blog","url":"https://www.cikal.studio/blog/","publisher":{"@type":"Organization","name":"Cikal Studio Labs","url":"https://www.cikal.studio/"},"description":"Tutorial software development, blockchain, AI systems, dan case study dari Jakarta."}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --navy-1:#080C18;--navy-2:#0D1220;--navy-3:#111827;--navy-4:#161D2E;--slate:rgba(255,255,255,0.07);--text:#F0F4FF;--text-2:#8B95B0;--text-3:#4B5470;--cyan:#00C2CB;--purple:#7B3FE4;--green:#22D48A;--gold:#C9A84C; }
+    body { background:var(--navy-1);color:var(--text);font-family:'Inter',sans-serif;line-height:1.6; }
+    a { color: inherit; }
+    nav { background:rgba(8,12,24,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--slate);padding:0 24px;position:sticky;top:0;z-index:99; }
+    .nav-inner { max-width:1200px;margin:0 auto;height:64px;display:flex;align-items:center;gap:32px; }
+    .nav-logo { display:flex;align-items:center;gap:8px;text-decoration:none; }
+    .nav-logo img { width:32px;height:32px;border-radius:8px; }
+    .nav-logo span { font-family:'Syne',sans-serif;font-weight:700;font-size:16px;color:var(--text); }
+    .nav-logo em { font-style:normal;color:var(--cyan); }
+    .nav-back { margin-left:auto;font-size:13px;color:var(--text-3);text-decoration:none;transition:color 0.2s; }
+    .nav-back:hover { color:var(--cyan); }
+    .container { max-width:1100px;margin:0 auto;padding:0 24px; }
+    .blog-hero { padding:64px 0 48px;text-align:center; }
+    .blog-tag { display:inline-block;font-size:11px;font-family:'JetBrains Mono',monospace;color:var(--cyan);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:12px; }
+    .blog-hero h1 { font-family:'Syne',sans-serif;font-size:clamp(32px,5vw,52px);font-weight:800;margin-bottom:14px;line-height:1.15; }
+    .gradient-text { background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text; }
+    .blog-hero p { font-size:16px;color:var(--text-2);max-width:520px;margin:0 auto; }
+
+    /* FILTERS */
+    .filters { display:flex;gap:8px;flex-wrap:wrap;margin:32px 0 40px;justify-content:center; }
+    .filter-btn { padding:6px 16px;border-radius:20px;border:1px solid var(--slate);background:var(--navy-3);color:var(--text-3);font-size:13px;cursor:pointer;transition:all 0.2s;font-family:'JetBrains Mono',monospace; }
+    .filter-btn.active,.filter-btn:hover { background:var(--cyan);color:var(--navy-1);border-color:var(--cyan); }
+
+    /* GRID */
+    .articles-grid { display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding-bottom:80px; }
+    .article-card { background:var(--navy-3);border:1px solid var(--slate);border-radius:16px;overflow:hidden;text-decoration:none;display:flex;flex-direction:column;transition:all 0.2s; }
+    .article-card:hover { border-color:rgba(0,194,203,0.3);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,194,203,0.06); }
+    .card-top { padding:24px 24px 0; }
+    .card-badges { display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap; }
+    .badge-lang { font-size:9px;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:4px;font-weight:600;text-transform:uppercase; }
+    .badge-en { background:rgba(0,194,203,0.1);border:1px solid rgba(0,194,203,0.2);color:var(--cyan); }
+    .badge-id { background:rgba(34,212,138,0.1);border:1px solid rgba(34,212,138,0.2);color:var(--green); }
+    .badge-cat { font-size:9px;font-family:'JetBrains Mono',monospace;padding:2px 7px;border-radius:4px;background:rgba(123,63,228,0.1);border:1px solid rgba(123,63,228,0.2);color:var(--purple);text-transform:uppercase; }
+    .article-card h2 { font-family:'Syne',sans-serif;font-size:16px;font-weight:700;line-height:1.4;margin-bottom:10px;color:var(--text); }
+    .article-card p { font-size:13px;color:var(--text-2);line-height:1.6;margin-bottom:16px; }
+    .card-footer { margin-top:auto;padding:14px 24px;border-top:1px solid var(--slate);display:flex;justify-content:space-between;align-items:center; }
+    .card-meta { font-size:10px;color:var(--text-3);font-family:'JetBrains Mono',monospace; }
+    .card-read { font-size:12px;color:var(--cyan);font-weight:600; }
+
+    footer { border-top:1px solid var(--slate);padding:28px 0;text-align:center; }
+    footer a { color:var(--text-3);font-size:13px;text-decoration:none;margin:0 12px; }
+    footer a:hover { color:var(--cyan); }
+    footer p { font-size:11px;color:var(--text-3);margin-top:12px;font-family:'JetBrains Mono',monospace; }
+
+    @media (max-width:768px) { .articles-grid { grid-template-columns:1fr; } }
+    @media (max-width:480px) { .articles-grid { grid-template-columns:1fr; } }
+  </style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="../" class="nav-logo">
+      <img src="../images/logo.png" alt="Cikal Studio Labs" />
+      <span>Cikal Studio <em>Labs</em></span>
+    </a>
+    <a href="../" class="nav-back">← Back to Home</a>
+  </div>
+</nav>
+
+<div class="container">
+  <div class="blog-hero">
+    <div class="blog-tag">Knowledge Base</div>
+    <h1>Blog & <span class="gradient-text">Insights</span></h1>
+    <p>Tutorial teknis, case study, dan panduan dari tim Cikal Studio Labs. Dalam Bahasa Indonesia dan English.</p>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" onclick="filterArticles('all')">All</button>
+    <button class="filter-btn" onclick="filterArticles('blockchain')">Blockchain</button>
+    <button class="filter-btn" onclick="filterArticles('saas')">SaaS</button>
+    <button class="filter-btn" onclick="filterArticles('ai')">AI Systems</button>
+    <button class="filter-btn" onclick="filterArticles('casestudy')">Case Study</button>
+    <button class="filter-btn" onclick="filterArticles('en')">🇺🇸 English</button>
+    <button class="filter-btn" onclick="filterArticles('id')">🇮🇩 Indonesia</button>
+  </div>
+
+  <div class="articles-grid" id="articles-grid">
+
+    <a href="en/how-to-launch-token-bnb-chain.html" class="article-card" data-tags="blockchain en">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-en">EN</span><span class="badge-cat">Blockchain</span></div>
+        <h2>How to Launch a Token on BNB Chain: Complete Guide 2025</h2>
+        <p>Step-by-step from writing your Solidity contract to listing on PancakeSwap, getting audited, and reaching 17+ listing platforms.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 8 min</span><span class="card-read">Read →</span></div>
+    </a>
+
+    <a href="id/cara-membuat-saas-indonesia.html" class="article-card" data-tags="saas id">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-id">ID</span><span class="badge-cat">SaaS</span></div>
+        <h2>Cara Membuat Aplikasi SaaS untuk Pasar Indonesia: Panduan Lengkap</h2>
+        <p>Dari arsitektur multi-tenant hingga integrasi payment gateway lokal — semua yang perlu Anda tahu untuk membangun SaaS di Indonesia.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 10 menit</span><span class="card-read">Baca →</span></div>
+    </a>
+
+    <a href="en/yfin-ecosystem-case-study.html" class="article-card" data-tags="casestudy blockchain en">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-en">EN</span><span class="badge-cat">Case Study</span></div>
+        <h2>Building a Full DeFi Ecosystem in 6 Months: $YFIN Case Study</h2>
+        <p>How we built DEX, launchpad, security toolkit, payment protocol, and 10+ live products from zero — and what we learned.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 12 min</span><span class="card-read">Read →</span></div>
+    </a>
+
+    <a href="id/biaya-jasa-software-development-indonesia.html" class="article-card" data-tags="saas id">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-id">ID</span><span class="badge-cat">SaaS</span></div>
+        <h2>Berapa Biaya Jasa Software Development di Indonesia? Panduan Harga 2025</h2>
+        <p>Perbandingan harga jasa pembuatan software, SaaS, dan aplikasi mobile di Indonesia — dari freelancer hingga agency.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 7 menit</span><span class="card-read">Baca →</span></div>
+    </a>
+
+    <a href="en/solidity-smart-contract-audit-guide.html" class="article-card" data-tags="blockchain en">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-en">EN</span><span class="badge-cat">Blockchain</span></div>
+        <h2>Smart Contract Audit Guide: How to Pass with Zero Critical Findings</h2>
+        <p>Practical walkthrough of the audit process — common vulnerabilities, what auditors look for, and how $YFIN passed InterFi with 0 critical findings.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 9 min</span><span class="card-read">Read →</span></div>
+    </a>
+
+    <a href="id/panduan-ai-agent-bisnis-indonesia.html" class="article-card" data-tags="ai id">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-id">ID</span><span class="badge-cat">AI Systems</span></div>
+        <h2>Panduan AI Agent untuk Bisnis Indonesia: Otomasi Sales & Customer Service</h2>
+        <p>Bagaimana AI agent bisa mengotomasi prospecting, follow-up WhatsApp, dan customer service — dengan contoh implementasi nyata.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 11 menit</span><span class="card-read">Baca →</span></div>
+    </a>
+
+    <a href="en/rwa-token-real-world-assets-blockchain.html" class="article-card" data-tags="blockchain en">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-en">EN</span><span class="badge-cat">Blockchain</span></div>
+        <h2>RWA Tokens Explained: Connecting Real-World Assets to Blockchain</h2>
+        <p>How Real World Asset tokens work, why they matter for commodity businesses, and how $YFIN uses tuna export revenue as RWA backing.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 10 min</span><span class="card-read">Read →</span></div>
+    </a>
+
+    <a href="id/nextjs-fastapi-saas-stack-indonesia.html" class="article-card" data-tags="saas ai id">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-id">ID</span><span class="badge-cat">SaaS</span></div>
+        <h2>Stack Terbaik untuk SaaS 2025: Next.js + FastAPI + PostgreSQL</h2>
+        <p>Kenapa kami memilih stack ini untuk semua proyek SaaS kami — keunggulan, keterbatasan, dan tips deployment ke Vercel + VPS.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 8 menit</span><span class="card-read">Baca →</span></div>
+    </a>
+
+    <a href="en/multi-agent-ai-system-python.html" class="article-card" data-tags="ai en">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-en">EN</span><span class="badge-cat">AI Systems</span></div>
+        <h2>Building a Multi-Agent AI System in Python: Architecture & Real Examples</h2>
+        <p>How to design, coordinate, and deploy a multi-agent AI pipeline using Claude, Gemini, and FastAPI — with real production examples.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 13 min</span><span class="card-read">Read →</span></div>
+    </a>
+
+    <a href="id/token-launch-checklist-indonesia.html" class="article-card" data-tags="blockchain id">
+      <div class="card-top">
+        <div class="card-badges"><span class="badge-lang badge-id">ID</span><span class="badge-cat">Blockchain</span></div>
+        <h2>Checklist Token Launch 2025: Dari Smart Contract Sampai Listing CEX</h2>
+        <p>Daftar lengkap 40+ langkah yang wajib dilakukan sebelum, selama, dan sesudah meluncurkan token kripto di Indonesia.</p>
+      </div>
+      <div class="card-footer"><span class="card-meta">Jun 26, 2026 · 6 menit</span><span class="card-read">Baca →</span></div>
+    </a>
+
+  </div>
+</div>
+
+<footer>
+  <a href="../">Home</a>
+  <a href="../token-launch.html">Token Launch</a>
+  <a href="https://wa.me/628118885567" target="_blank">WhatsApp</a>
+  <a href="mailto:admin@cikal.studio">Email</a>
+  <p>© 2026 Cikal Studio Labs · Built by Ahmad Riyadi · Jakarta, Indonesia</p>
+</footer>
+
+<script>
+function filterArticles(tag) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.article-card').forEach(card => {
+    const tags = card.getAttribute('data-tags') || '';
+    card.style.display = (tag === 'all' || tags.includes(tag)) ? 'flex' : 'none';
+  });
+}
+</script>
+</body>
+</html>

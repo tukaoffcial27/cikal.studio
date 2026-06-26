@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>How to Launch a Token on BNB Chain: Complete Guide 2025 | Cikal Studio Labs</title>
+<meta name="description" content="Step-by-step guide to launching a BEP-20 token on BNB Chain — from writing Solidity smart contract to PancakeSwap listing, InterFi audit, and getting listed on CoinGecko.">
+<link rel="canonical" href="https://www.cikal.studio/blog/en/how-to-launch-token-bnb-chain.html">
+<meta property="og:title" content="How to Launch a Token on BNB Chain: Complete Guide 2025">
+<meta property="og:description" content="Full walkthrough: Solidity contract, audit, PancakeSwap LP, CoinGecko listing — from the team that built $YFIN.">
+<meta property="og:type" content="article">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to Launch a Token on BNB Chain: Complete Guide 2025","datePublished":"2026-06-26","author":{"@type":"Person","name":"Ahmad Riyadi"},"publisher":{"@type":"Organization","name":"Cikal Studio Labs","url":"https://www.cikal.studio/"},"description":"Complete step-by-step guide for launching a BEP-20 token on BNB Chain.","mainEntityOfPage":"https://www.cikal.studio/blog/en/how-to-launch-token-bnb-chain.html"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy-1:#080C18;--navy-2:#0D1220;--navy-3:#111827;--navy-4:#161D2E;--slate:rgba(255,255,255,0.07);--text:#F0F4FF;--text-2:#8B95B0;--text-3:#4B5470;--cyan:#00C2CB;--purple:#7B3FE4;--green:#22D48A;--gold:#C9A84C}
+body{background:var(--navy-1);color:var(--text);font-family:Inter,sans-serif;line-height:1.6}
+nav{background:rgba(8,12,24,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--slate);padding:0 24px;position:sticky;top:0;z-index:99}
+.nav-inner{max-width:800px;margin:0 auto;height:64px;display:flex;align-items:center;gap:16px}
+.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}
+.nav-logo img{width:28px;height:28px;border-radius:6px}
+.nav-logo span{font-family:Syne,sans-serif;font-weight:700;font-size:15px;color:var(--text)}
+.nav-logo em{font-style:normal;color:var(--cyan)}
+.nav-links{margin-left:auto;display:flex;gap:16px}
+.nav-links a{font-size:13px;color:var(--text-3);text-decoration:none;transition:color 0.2s}
+.nav-links a:hover{color:var(--cyan)}
+.article-wrap{max-width:800px;margin:0 auto;padding:48px 24px 80px}
+.article-header{margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--slate)}
+.breadcrumb{font-size:12px;color:var(--text-3);font-family:JetBrains Mono,monospace;margin-bottom:20px}
+.breadcrumb a{color:var(--cyan);text-decoration:none}
+.art-badges{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+.badge{font-size:10px;padding:3px 9px;border-radius:5px;font-family:JetBrains Mono,monospace;font-weight:600;text-transform:uppercase}
+.badge-en{background:rgba(0,194,203,0.1);border:1px solid rgba(0,194,203,0.2);color:var(--cyan)}
+.badge-cat{background:rgba(123,63,228,0.1);border:1px solid rgba(123,63,228,0.2);color:var(--purple)}
+h1{font-family:Syne,sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;margin-bottom:16px;color:var(--text)}
+.art-meta{font-size:12px;color:var(--text-3);font-family:JetBrains Mono,monospace;display:flex;gap:16px;flex-wrap:wrap}
+.art-intro{font-size:17px;color:var(--text-2);line-height:1.75;margin-bottom:40px;padding:24px;background:var(--navy-3);border-left:3px solid var(--cyan);border-radius:0 12px 12px 0}
+.article-body h2{font-family:Syne,sans-serif;font-size:24px;font-weight:700;margin:40px 0 16px;color:var(--text)}
+.article-body h3{font-family:Syne,sans-serif;font-size:18px;font-weight:700;margin:28px 0 12px;color:var(--cyan)}
+.article-body p{font-size:15px;color:var(--text-2);line-height:1.8;margin-bottom:16px}
+.article-body ul,.article-body ol{margin:16px 0 20px 24px;color:var(--text-2);font-size:15px;line-height:1.8}
+.article-body li{margin-bottom:8px}
+.article-body strong{color:var(--text);font-weight:600}
+.article-body code{font-family:JetBrains Mono,monospace;font-size:13px;background:var(--navy-3);padding:2px 7px;border-radius:4px;color:var(--cyan);border:1px solid var(--slate)}
+.code-block{background:var(--navy-2);border:1px solid var(--slate);border-radius:12px;padding:20px 24px;margin:20px 0;overflow-x:auto}
+.code-block pre{font-family:JetBrains Mono,monospace;font-size:13px;color:#A8C8FF;line-height:1.6}
+.callout{background:rgba(0,194,203,0.06);border:1px solid rgba(0,194,203,0.2);border-radius:12px;padding:20px 24px;margin:24px 0}
+.callout-gold{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.2)}
+.callout p{margin:0;font-size:14px;color:var(--text-2)}
+.callout strong{color:var(--cyan)}
+.callout-gold strong{color:var(--gold)}
+.art-cta{background:linear-gradient(135deg,rgba(0,194,203,0.08),rgba(123,63,228,0.08));border:1px solid rgba(0,194,203,0.2);border-radius:16px;padding:32px;text-align:center;margin-top:48px}
+.art-cta h3{font-family:Syne,sans-serif;font-size:22px;font-weight:700;margin-bottom:10px}
+.art-cta p{font-size:14px;color:var(--text-2);margin-bottom:20px}
+.btn-wa{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:#25D366;color:white;font-weight:700;border-radius:10px;text-decoration:none;font-size:14px;transition:opacity 0.2s}
+.btn-wa:hover{opacity:0.9}
+.related{margin-top:48px;padding-top:32px;border-top:1px solid var(--slate)}
+.related h3{font-family:Syne,sans-serif;font-size:18px;font-weight:700;margin-bottom:20px;color:var(--text)}
+.related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.related-card{background:var(--navy-3);border:1px solid var(--slate);border-radius:12px;padding:16px;text-decoration:none;display:block;transition:all 0.2s}
+.related-card:hover{border-color:rgba(0,194,203,0.3)}
+.related-card .rc-cat{font-size:10px;font-family:JetBrains Mono,monospace;color:var(--purple);text-transform:uppercase;margin-bottom:6px}
+.related-card h4{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}
+footer{border-top:1px solid var(--slate);padding:24px;text-align:center}
+footer a{color:var(--text-3);font-size:13px;text-decoration:none;margin:0 10px}
+footer a:hover{color:var(--cyan)}
+footer p{font-size:11px;color:var(--text-3);margin-top:10px;font-family:JetBrains Mono,monospace}
+@media(max-width:600px){.related-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a href="../../" class="nav-logo"><img src="../../images/logo.png" alt="Cikal Studio Labs"><span>Cikal Studio <em>Labs</em></span></a>
+  <div class="nav-links"><a href="../">← Blog</a><a href="https://wa.me/628118885567" target="_blank">Contact</a></div>
+</div></nav>
+
+<div class="article-wrap">
+  <div class="article-header">
+    <div class="breadcrumb"><a href="../../">Home</a> / <a href="../">Blog</a> / Blockchain</div>
+    <div class="art-badges"><span class="badge badge-en">EN</span><span class="badge badge-cat">Blockchain</span></div>
+    <h1>How to Launch a Token on BNB Chain: Complete Guide 2025</h1>
+    <div class="art-meta">
+      <span>📅 June 26, 2026</span>
+      <span>⏱ 8 min read</span>
+      <span>✍️ Ahmad Riyadi, Cikal Studio Labs</span>
+    </div>
+  </div>
+
+  <div class="art-intro">
+    This guide is based on our real experience launching $YFIN — a BEP-20 token on BNB Chain that reached 17+ listing platforms, passed InterFi audit with zero critical findings, and hit $436K in verified RWA revenue. This is what actually works.
+  </div>
+
+  <div class="article-body">
+    <h2>Why BNB Chain?</h2>
+    <p>BNB Smart Chain (BSC) remains the most practical blockchain for token launches in 2025–2026. The reasons are straightforward: <strong>low transaction fees</strong> (typically $0.05–$0.30 per tx vs $5–50 on Ethereum), a massive DeFi ecosystem anchored by PancakeSwap, and a large retail investor base especially in Southeast Asia.</p>
+    <p>For founders building tokens backed by real businesses — what we call RWA (Real World Asset) tokens — BSC provides the liquidity and accessibility that matters most at launch.</p>
+
+    <h2>Step 1: Write Your Solidity Smart Contract</h2>
+    <p>A standard BEP-20 token contract is not complicated. Here's the minimal production-ready structure we use:</p>
+    <div class="code-block"><pre>// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+
+contract YFINToken is ERC20, Ownable {
+    uint256 public constant MAX_SUPPLY = 1_000_000_000 * 10**18; // 1B fixed
+
+    constructor() ERC20("YellowFin Token", "YFIN") Ownable(msg.sender) {
+        _mint(msg.sender, MAX_SUPPLY);
+    }
+    // No mint function = non-mintable, fixed supply
+}</pre></div>
+
+    <div class="callout">
+      <p><strong>Key principle:</strong> Keep your token contract simple. The more complex your tokenomics contract, the more attack surface for auditors to find issues. Complexity should live in your vesting contracts, not the token itself.</p>
+    </div>
+
+    <h3>What to avoid in your token contract</h3>
+    <ul>
+      <li>Transfer taxes (creates honeypot concerns, blocks CEX listing)</li>
+      <li>Owner mint functions (red flag for investors)</li>
+      <li>Blacklist functions without clear governance</li>
+      <li>Upgradeable proxies (unless you have a very good reason)</li>
+    </ul>
+
+    <h2>Step 2: Deploy and Verify on BSCScan</h2>
+    <p>Use <strong>Hardhat</strong> for deployment — it integrates cleanly with BSCScan verification:</p>
+    <div class="code-block"><pre>// hardhat.config.js
+networks: {
+  bsc: {
+    url: "https://bsc-dataseed.binance.org/",
+    chainId: 56,
+    accounts: [process.env.DEPLOYER_PK]
+  }
+},
+etherscan: {
+  apiKey: process.env.BSCSCAN_API_KEY
+}</pre></div>
+    <p>After deployment, run <code>npx hardhat verify --network bsc YOUR_CONTRACT_ADDRESS</code>. A verified contract is non-negotiable — any token without source code verification will be flagged as suspicious by every listing platform.</p>
+
+    <h2>Step 3: Lock Your Liquidity</h2>
+    <p>Add initial liquidity on PancakeSwap V2, then immediately lock it using <strong>PinkLock</strong> or <strong>Mudra</strong>. We locked $YFIN LP for 12 months. This single action removes the biggest investor concern: rug pull risk.</p>
+
+    <div class="callout callout-gold">
+      <p><strong>$YFIN example:</strong> We locked the YFIN/WBNB LP at PancakeSwap V2 via PinkLock until May 2027. This is prominently displayed on every listing platform and is a primary trust signal for investors.</p>
+    </div>
+
+    <h2>Step 4: Get Audited</h2>
+    <p>For tokens below $500K market cap, <strong>InterFi Network</strong> offers solid audits at accessible prices. For larger projects, consider CertiK or Hacken. The audit report needs to be public and linked from your contract.</p>
+    <p>$YFIN passed InterFi with <strong>zero Critical, zero Major, zero Medium findings</strong>. This wasn't luck — it was because our contract was simple and we used OpenZeppelin's battle-tested base contracts.</p>
+
+    <h2>Step 5: Get Listed</h2>
+    <p>The listing sequence that worked for us:</p>
+    <ol>
+      <li><strong>DexScreener</strong> — auto-detected, but claim and verify your project page</li>
+      <li><strong>GeckoTerminal</strong> — submit via their form, usually 24–48h</li>
+      <li><strong>CoinSniper, DEXTools, PooCoin</strong> — community-focused, self-submit</li>
+      <li><strong>CoinGecko</strong> — requires audit + LP lock + active trading. Takes 2–4 weeks</li>
+      <li><strong>CoinMarketCap</strong> — stricter, needs consistent volume history</li>
+      <li><strong>CEX (MEXC, Gate.io, etc.)</strong> — approach after CoinGecko listing + stable LP</li>
+    </ol>
+
+    <h2>Step 6: Set Up Your Vesting Contracts</h2>
+    <p>Any tokens not in the public LP should be in verifiable vesting contracts — not sitting in a wallet. We deployed five separate Treasury Vesting contracts for $YFIN (Main, Reserve, Marketing, Team Manual, Development) with cliff dates set to November 2026.</p>
+    <p>Each contract is verified on BSCScan. This brings locked supply to <strong>86.64%</strong> — a major credibility signal.</p>
+
+    <h2>Common Mistakes That Kill Token Projects</h2>
+    <ul>
+      <li>Launching without an audit (creates FUD that's hard to recover from)</li>
+      <li>Not locking liquidity from day one</li>
+      <li>Complex tokenomics that confuse investors</li>
+      <li>No real utility or RWA backing — pure speculation doesn't sustain</li>
+      <li>Ignoring community building during the technical build phase</li>
+    </ul>
+
+    <div class="callout">
+      <p><strong>Our approach with $YFIN:</strong> We backed the token with real tuna export revenue from PT Cikal Tuna Mandiri — $436K in verified transactions. Every buyback is funded by real commodity sales at Rp 50/kg of verified tuna sold. This is what makes RWA tokens fundamentally different from pure speculative tokens.</p>
+    </div>
+
+    <h2>Cost Breakdown for a Token Launch</h2>
+    <ul>
+      <li>Smart contract deployment: ~$5–15 in BNB gas</li>
+      <li>InterFi audit: $300–800 (depending on complexity)</li>
+      <li>PinkLock LP lock: ~$10 flat fee</li>
+      <li>Initial LP: minimum $1,000–3,000 recommended</li>
+      <li>Domain + hosting for project website: $20–100/year</li>
+      <li>CoinGecko listing: free (but requires criteria)</li>
+      <li>CMC listing: free (but slower)</li>
+    </ul>
+    <p>Total minimum: around <strong>$1,500–3,000</strong> for a credible launch. Our full ecosystem (10 products + audit + marketing) was significantly more — but you can launch a solid token with much less.</p>
+  </div>
+
+  <div class="art-cta">
+    <h3>Need a Token Launch Done Right?</h3>
+    <p>We offer end-to-end token launch services — smart contract, audit coordination, website, LP setup, and listing support. Starting at $800.</p>
+    <a href="https://wa.me/628118885567" target="_blank" class="btn-wa">💬 Talk to Us on WhatsApp</a>
+  </div>
+
+  <div class="related">
+    <h3>Related Articles</h3>
+    <div class="related-grid">
+      <a href="solidity-smart-contract-audit-guide.html" class="related-card">
+        <div class="rc-cat">Blockchain</div>
+        <h4>Smart Contract Audit Guide: How to Pass with Zero Critical Findings</h4>
+      </a>
+      <a href="yfin-ecosystem-case-study.html" class="related-card">
+        <div class="rc-cat">Case Study</div>
+        <h4>Building a Full DeFi Ecosystem in 6 Months: $YFIN Case Study</h4>
+      </a>
+      <a href="rwa-token-real-world-assets-blockchain.html" class="related-card">
+        <div class="rc-cat">Blockchain</div>
+        <h4>RWA Tokens Explained: Connecting Real-World Assets to Blockchain</h4>
+      </a>
+      <a href="../id/token-launch-checklist-indonesia.html" class="related-card">
+        <div class="rc-cat">Blockchain · ID</div>
+        <h4>Checklist Token Launch 2025: Dari Smart Contract Sampai Listing CEX</h4>
+      </a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="../../">Home</a><a href="../">Blog</a><a href="../../token-launch.html">Token Launch</a><a href="https://wa.me/628118885567" target="_blank">WhatsApp</a>
+  <p>© 2026 Cikal Studio Labs · Built by Ahmad Riyadi · Jakarta, Indonesia</p>
+</footer>
+</body></html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Building a Full DeFi Ecosystem in 6 Months: $YFIN Case Study | Cikal Studio Labs</title>
+<meta name="description" content="How Cikal Studio Labs built the complete $YFIN DeFi ecosystem — DEX, launchpad, security tools, payment protocol, and 10+ live products — in 6 months from zero.">
+<link rel="canonical" href="https://www.cikal.studio/blog/en/yfin-ecosystem-case-study.html">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Building a Full DeFi Ecosystem in 6 Months: $YFIN Case Study","datePublished":"2026-06-26","author":{"@type":"Person","name":"Ahmad Riyadi"},"publisher":{"@type":"Organization","name":"Cikal Studio Labs","url":"https://www.cikal.studio/"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}:root{--navy-1:#080C18;--navy-2:#0D1220;--navy-3:#111827;--slate:rgba(255,255,255,0.07);--text:#F0F4FF;--text-2:#8B95B0;--text-3:#4B5470;--cyan:#00C2CB;--purple:#7B3FE4;--green:#22D48A;--gold:#C9A84C}body{background:var(--navy-1);color:var(--text);font-family:Inter,sans-serif;line-height:1.6}nav{background:rgba(8,12,24,0.95);backdrop-filter:blur(12px);border-bottom:1px solid var(--slate);padding:0 24px;position:sticky;top:0;z-index:99}.nav-inner{max-width:800px;margin:0 auto;height:64px;display:flex;align-items:center;gap:16px}.nav-logo{display:flex;align-items:center;gap:8px;text-decoration:none}.nav-logo img{width:28px;height:28px;border-radius:6px}.nav-logo span{font-family:Syne,sans-serif;font-weight:700;font-size:15px;color:var(--text)}.nav-logo em{font-style:normal;color:var(--cyan)}.nav-links{margin-left:auto;display:flex;gap:16px}.nav-links a{font-size:13px;color:var(--text-3);text-decoration:none;transition:color 0.2s}.nav-links a:hover{color:var(--cyan)}.article-wrap{max-width:800px;margin:0 auto;padding:48px 24px 80px}.article-header{margin-bottom:40px;padding-bottom:32px;border-bottom:1px solid var(--slate)}.breadcrumb{font-size:12px;color:var(--text-3);font-family:JetBrains Mono,monospace;margin-bottom:20px}.breadcrumb a{color:var(--cyan);text-decoration:none}.art-badges{display:flex;gap:8px;margin-bottom:16px}.badge{font-size:10px;padding:3px 9px;border-radius:5px;font-family:JetBrains Mono,monospace;font-weight:600;text-transform:uppercase}.badge-en{background:rgba(0,194,203,0.1);border:1px solid rgba(0,194,203,0.2);color:var(--cyan)}.badge-cat{background:rgba(123,63,228,0.1);border:1px solid rgba(123,63,228,0.2);color:var(--purple)}h1{font-family:Syne,sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;line-height:1.2;margin-bottom:16px;color:var(--text)}.art-meta{font-size:12px;color:var(--text-3);font-family:JetBrains Mono,monospace;display:flex;gap:16px;flex-wrap:wrap}.art-intro{font-size:17px;color:var(--text-2);line-height:1.75;margin-bottom:40px;padding:24px;background:var(--navy-3);border-left:3px solid var(--cyan);border-radius:0 12px 12px 0}.article-body h2{font-family:Syne,sans-serif;font-size:24px;font-weight:700;margin:40px 0 16px;color:var(--text)}.article-body h3{font-family:Syne,sans-serif;font-size:18px;font-weight:700;margin:28px 0 12px;color:var(--cyan)}.article-body p{font-size:15px;color:var(--text-2);line-height:1.8;margin-bottom:16px}.article-body ul,.article-body ol{margin:16px 0 20px 24px;color:var(--text-2);font-size:15px;line-height:1.8}.article-body li{margin-bottom:8px}.article-body strong{color:var(--text);font-weight:600}.callout{background:rgba(0,194,203,0.06);border:1px solid rgba(0,194,203,0.2);border-radius:12px;padding:20px 24px;margin:24px 0}.callout-gold{background:rgba(201,168,76,0.06);border-color:rgba(201,168,76,0.2)}.callout p{margin:0;font-size:14px;color:var(--text-2)}.callout strong{color:var(--cyan)}.callout-gold strong{color:var(--gold)}.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:24px 0}.stat-box{background:var(--navy-3);border:1px solid var(--slate);border-radius:12px;padding:16px;text-align:center}.stat-box .v{font-family:Syne,sans-serif;font-size:24px;font-weight:800;color:var(--gold)}.stat-box .l{font-size:11px;color:var(--text-2);margin-top:4px}.art-cta{background:linear-gradient(135deg,rgba(0,194,203,0.08),rgba(123,63,228,0.08));border:1px solid rgba(0,194,203,0.2);border-radius:16px;padding:32px;text-align:center;margin-top:48px}.art-cta h3{font-family:Syne,sans-serif;font-size:22px;font-weight:700;margin-bottom:10px}.art-cta p{font-size:14px;color:var(--text-2);margin-bottom:20px}.btn-wa{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:#25D366;color:white;font-weight:700;border-radius:10px;text-decoration:none;font-size:14px}.related{margin-top:48px;padding-top:32px;border-top:1px solid var(--slate)}.related h3{font-family:Syne,sans-serif;font-size:18px;font-weight:700;margin-bottom:20px;color:var(--text)}.related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.related-card{background:var(--navy-3);border:1px solid var(--slate);border-radius:12px;padding:16px;text-decoration:none;display:block;transition:all 0.2s}.related-card:hover{border-color:rgba(0,194,203,0.3)}.related-card .rc-cat{font-size:10px;font-family:JetBrains Mono,monospace;color:var(--purple);text-transform:uppercase;margin-bottom:6px}.related-card h4{font-size:14px;font-weight:600;color:var(--text);line-height:1.4}footer{border-top:1px solid var(--slate);padding:24px;text-align:center}footer a{color:var(--text-3);font-size:13px;text-decoration:none;margin:0 10px}footer a:hover{color:var(--cyan)}footer p{font-size:11px;color:var(--text-3);margin-top:10px;font-family:JetBrains Mono,monospace}@media(max-width:600px){.related-grid{grid-template-columns:1fr}.stat-row{grid-template-columns:repeat(2,1fr)}}</style>
+</head>
+<body>
+<nav><div class="nav-inner">
+  <a href="../../" class="nav-logo"><img src="../../images/logo.png" alt="Cikal Studio Labs"><span>Cikal Studio <em>Labs</em></span></a>
+  <div class="nav-links"><a href="../">← Blog</a><a href="https://wa.me/628118885567" target="_blank">Contact</a></div>
+</div></nav>
+<div class="article-wrap">
+  <div class="article-header">
+    <div class="breadcrumb"><a href="../../">Home</a> / <a href="../">Blog</a> / Case Study</div>
+    <div class="art-badges"><span class="badge badge-en">EN</span><span class="badge badge-cat">Case Study</span></div>
+    <h1>Building a Full DeFi Ecosystem in 6 Months: $YFIN Case Study</h1>
+    <div class="art-meta"><span>📅 June 26, 2026</span><span>⏱ 12 min read</span><span>✍️ Ahmad Riyadi, Cikal Studio Labs</span></div>
+  </div>
+  <div class="art-intro">
+    $YFIN is not just a token — it's a complete DeFi ecosystem we built in-house to prove what Cikal Studio Labs can deliver. 10 live products, 1 audit, 17+ listings, and $436K in verified RWA revenue. Here's the full story.
+  </div>
+  <div class="article-body">
+    <div class="stat-row">
+      <div class="stat-box"><div class="v">10+</div><div class="l">Live Products</div></div>
+      <div class="stat-box"><div class="v">6mo</div><div class="l">Build Time</div></div>
+      <div class="stat-box"><div class="v">$436K</div><div class="l">RWA Revenue</div></div>
+      <div class="stat-box"><div class="v">0</div><div class="l">Critical Findings</div></div>
+    </div>
+
+    <h2>Why We Built $YFIN</h2>
+    <p>In early 2026, we were pitching Cikal Studio Labs to potential clients as a blockchain and software development agency. The feedback was consistent: "Show us something you've built." We had portfolio pieces, but nothing that demonstrated the full scope of what we could do.</p>
+    <p>So we decided to build our own ecosystem — not as a side project, but as a serious live product backed by real business revenue from <strong>PT Cikal Tuna Mandiri</strong>, our yellowfin tuna export company in Eastern Indonesia.</p>
+
+    <h2>The Architecture Decision</h2>
+    <p>Most token projects launch a token, create a website, and call it an ecosystem. We did the opposite: we designed the full product map first, then built in parallel.</p>
+    <h3>Products Built</h3>
+    <ul>
+      <li><strong>$YFIN Token</strong> — BEP-20, 1B fixed supply, 0% tax, non-mintable. Contract: 0xF576bcFac...</li>
+      <li><strong>YFinDEX</strong> — Custom DEX built on PancakeSwap V2 Router with YFIN fee discounts</li>
+      <li><strong>YFINPad</strong> — IDO Launchpad with no-code token deployment and vesting</li>
+      <li><strong>YFIN Shield</strong> — Web3 security toolkit: honeypot checker, rug pull detector, approval revoker</li>
+      <li><strong>YFIN Studio</strong> — Smart contract-as-a-service: BEP-20, vesting, NFT, RWA contracts</li>
+      <li><strong>YFIN Pay</strong> — Payment protocol where every transaction burns $YFIN</li>
+      <li><strong>YFIN Intelligence</strong> — On-chain analytics: whale tracking, token signals, hold-tiered access</li>
+      <li><strong>YFIN Monitor</strong> — Live token dashboard: price, holders, TX history, vesting countdown</li>
+      <li><strong>YFIN Hub</strong> — Community platform with KOL showcase and live stats</li>
+      <li><strong>yfin.io</strong> — Main project site with live RWA data and whitepaper</li>
+    </ul>
+
+    <h2>The RWA Backing Model</h2>
+    <p>This is what makes $YFIN fundamentally different from speculative tokens. PT Cikal Tuna Mandiri sells yellowfin tuna to Japanese buyers — 228.9 tons and $436K in verified transactions across 38 deals.</p>
+    <p>For every kilogram of verified tuna sold, <strong>Rp 50 goes into the buyback & burn program</strong>. This creates a direct connection between real commodity exports and token value. The buyback triggers are: InterFi audit complete ✓, LP above $3K ✓, MEXC Global listing (pending).</p>
+
+    <div class="callout callout-gold">
+      <p><strong>Key insight:</strong> The RWA model solves the fundamental problem of most DeFi tokens — no real value backing. By tying buyback to actual tuna export revenue, $YFIN has a floor that pure speculative tokens don't have.</p>
+    </div>
+
+    <h2>Technical Challenges We Solved</h2>
+    <h3>BSC RPC Quirk</h3>
+    <p>BNB Chain nodes sometimes return <code>to: ""</code> for contract creation transactions, which crashes ethers v6's <code>formatTransactionResponse</code>. Our workaround: detect this case and fall back to <code>eth_getTransactionReceipt</code> via curl before parsing.</p>
+    <h3>Switching from Moralis to Direct RPC</h3>
+    <p>We initially used Moralis for balance and transaction history on monitor.yfin.io. After reliability issues, we switched to direct RPC using <code>eth_call</code> and <code>eth_getLogs</code>. More resilient, zero API cost, full control.</p>
+    <h3>Treasury Vesting on BSCScan</h3>
+    <p>We deployed five separate Treasury Vesting contracts (520M YFIN total) all with cliff November 8, 2026. Getting all five verified on BSCScan and visible in the Wallet Transparency section of monitor.yfin.io took careful coordination but is now a major trust signal — 86.64% of supply is demonstrably locked.</p>
+
+    <h2>Listing Strategy</h2>
+    <p>We reached 17+ platforms in the first month. The sequence:</p>
+    <ol>
+      <li>DexScreener — auto-listed, then claimed and verified</li>
+      <li>GeckoTerminal — submitted, approved in 48h</li>
+      <li>CoinSniper, CoinVote, DEXTools, PooCoin — community platforms, self-submitted</li>
+      <li>CoinGecko — pending (requires volume history + active trading)</li>
+      <li>CoinMarketCap — pending (stricter requirements)</li>
+      <li>MEXC Global — target CEX (after CoinGecko listing)</li>
+    </ol>
+
+    <h2>What We Learned</h2>
+    <ul>
+      <li><strong>Simple contracts pass audits.</strong> Using OpenZeppelin base + minimal custom logic = 0 critical findings.</li>
+      <li><strong>Transparency compounds trust.</strong> Every wallet is public, every vesting contract is verified. Investors notice.</li>
+      <li><strong>RWA backing changes the conversation.</strong> "What backs this?" is the first question from serious investors — having a real answer is everything.</li>
+      <li><strong>10 products is too many to launch simultaneously.</strong> We managed it because it's our own project, but for clients we always recommend phased rollout.</li>
+    </ul>
+
+    <h2>Results</h2>
+    <p>Six months in: token live on BSC, 10 products in production, InterFi audit passed, 17+ platforms listed, $436K in verified RWA revenue, and most importantly — a live portfolio we can show any potential client.</p>
+    <p>Cikal Studio Labs went from "promising agency" to "here's 10 live products you can use right now." That's the power of eating your own cooking.</p>
+  </div>
+
+  <div class="art-cta">
+    <h3>Want a Token Ecosystem Like $YFIN?</h3>
+    <p>We build end-to-end — from token contract to full DeFi stack. Starter at $800, Full Ecosystem at $25,000.</p>
+    <a href="https://wa.me/628118885567" target="_blank" class="btn-wa">💬 Talk to Us on WhatsApp</a>
+  </div>
+
+  <div class="related">
+    <h3>Related Articles</h3>
+    <div class="related-grid">
+      <a href="how-to-launch-token-bnb-chain.html" class="related-card"><div class="rc-cat">Blockchain</div><h4>How to Launch a Token on BNB Chain: Complete Guide 2025</h4></a>
+      <a href="rwa-token-real-world-assets-blockchain.html" class="related-card"><div class="rc-cat">Blockchain</div><h4>RWA Tokens Explained: Connecting Real-World Assets to Blockchain</h4></a>
+      <a href="solidity-smart-contract-audit-guide.html" class="related-card"><div class="rc-cat">Blockchain</div><h4>Smart Contract Audit Guide: How to Pass with Zero Critical Findings</h4></a>
+      <a href="../id/token-launch-checklist-indonesia.html" class="related-card"><div class="rc-cat">Blockchain · ID</div><h4>Checklist Token Launch 2025: Dari Smart Contract Sampai Listing CEX</h4></a>
+    </div>
+  </div>
+</div>
+<footer><a href="../../">Home</a><a href="../">Blog</a><a href="../../token-launch.html">Token Launch</a><a href="https://wa.me/628118885567">WhatsApp</a><p>© 2026 Cikal Studio Labs · Ahmad Riyadi · Jakarta</p></footer>
+</body></html>
